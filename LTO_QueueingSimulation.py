@@ -41,7 +41,7 @@ def PlacePACD():
 
 
     try:
-        PACD_TimeConsume = (PACD_total_hours / float(PACD))
+        PACD_TimeConsume = (PACD_total_hours / (2 + float(PACD)))
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
@@ -50,13 +50,23 @@ def PlacePACD():
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
     except ValueError:
-        PACD_TimeConsume = (PACD_total_hours / 1)
+        PACD_TimeConsume = (PACD_total_hours / 2)
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
         minutes = int((PACD_TimeConsume - hours) * 60)
 
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ZeroDivisionError:
+        PACD_TimeConsume = (PACD_total_hours / 2)
+
+        # Convert PACD_TimeConsume into hours and minutes
+        hours = int(PACD_TimeConsume)
+        minutes = int((PACD_TimeConsume - hours) * 60)
+
+        print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+
 
 
 
@@ -87,6 +97,15 @@ def PlacePortal():
 
         print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
 
+    except ZeroDivisionError:
+        Portal_TimeConsume = (portal_total_hours / 1)
+
+        # Convert Portal_TimeConsume into hours and minutes
+        hours = int(Portal_TimeConsume)
+        minutes = int((Portal_TimeConsume - hours) * 60)
+
+        print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+
 
 def PlaceCashier():
     #consume atleast 1 and 10 secs minute per person = 70 secs
@@ -101,7 +120,17 @@ def PlaceCashier():
         minutes = int((Cashier_TimeConsume - hours) * 60)
 
         print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+
     except ValueError:
+        Cashier_TimeConsume = (Cashier_total_hours / 1)
+
+        # Convert Cashier_TimeConsume into hours and minutes
+        hours = int(Cashier_TimeConsume)
+        minutes = int((Cashier_TimeConsume - hours) * 60)
+
+        print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ZeroDivisionError:
         Cashier_TimeConsume = (Cashier_total_hours / 1)
 
         # Convert Cashier_TimeConsume into hours and minutes
@@ -138,16 +167,36 @@ def PlaceComputer():
     total_both_card_time_minutes = (total_blue_card_time + total_green_card_time) / 60
     total_both_card_time_hours = total_both_card_time_minutes / 60
 
-    ExaminationTimeConsume = total_both_card_time_hours / 7 + float(Computer)
 
-    # Convert Examination_TimeConsume into hours and minutes
-    hours = int(ExaminationTimeConsume)
-    minutes = int((ExaminationTimeConsume - hours) * 60)
+    try:
+        ExaminationTimeConsume = total_both_card_time_hours / (7 + float(Computer))
 
-    print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+        # Convert Examination_TimeConsume into hours and minutes
+        hours = int(ExaminationTimeConsume)
+        minutes = int((ExaminationTimeConsume - hours) * 60)
+
+        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ValueError:
+        ExaminationTimeConsume = total_both_card_time_hours / 7
+
+        # Convert Examination_TimeConsume into hours and minutes
+        hours = int(ExaminationTimeConsume)
+        minutes = int((ExaminationTimeConsume - hours) * 60)
+
+        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ZeroDivisionError:
+        ExaminationTimeConsume = total_both_card_time_hours / 7
+
+        # Convert Examination_TimeConsume into hours and minutes
+        hours = int(ExaminationTimeConsume)
+        minutes = int((ExaminationTimeConsume - hours) * 60)
+
+        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
 
 
-# To be fixed
+# To be fixed Dapat sa random ppl first 7 ang makaka accomodate ng room
 
 
 
@@ -171,6 +220,15 @@ def PlaceBiometric():
 
 
     except ValueError:
+        Biometric_TimeConsume = (Biometric_total_hours / 1)
+
+        # Convert PACD_TimeConsume into hours and minutes
+        hours = int(Biometric_TimeConsume)
+        minutes = int((Biometric_TimeConsume - hours) * 60)
+
+        print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ZeroDivisionError:
         Biometric_TimeConsume = (Biometric_total_hours / 1)
 
         # Convert PACD_TimeConsume into hours and minutes
