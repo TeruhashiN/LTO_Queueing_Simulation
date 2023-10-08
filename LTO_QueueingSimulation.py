@@ -39,13 +39,25 @@ def PlacePACD():
     PACD_total_minutes = applicants * 30 / 60
     PACD_total_hours = PACD_total_minutes / 60
 
-    PACD_TimeConsume = (PACD_total_hours / float(PACD))
 
-    # Convert PACD_TimeConsume into hours and minutes
-    hours = int(PACD_TimeConsume)
-    minutes = int((PACD_TimeConsume - hours) * 60)
+    try:
+        PACD_TimeConsume = (PACD_total_hours / float(PACD))
 
-    print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+        # Convert PACD_TimeConsume into hours and minutes
+        hours = int(PACD_TimeConsume)
+        minutes = int((PACD_TimeConsume - hours) * 60)
+
+        print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ValueError:
+        PACD_TimeConsume = (PACD_total_hours / 1)
+
+        # Convert PACD_TimeConsume into hours and minutes
+        hours = int(PACD_TimeConsume)
+        minutes = int((PACD_TimeConsume - hours) * 60)
+
+        print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+
 
 
 
@@ -57,13 +69,23 @@ def PlacePortal():
     portal_total_minutes = applicants * 60 / 60
     portal_total_hours = portal_total_minutes / 60
 
-    Portal_TimeConsume = (portal_total_hours / float(Portal))
+    try:
+        Portal_TimeConsume = (portal_total_hours / float(Portal))
 
-    # Convert PACD_TimeConsume into hours and minutes
-    hours = int(Portal_TimeConsume)
-    minutes = int((Portal_TimeConsume - hours) * 60)
+        # Convert Portal_TimeConsume into hours and minutes
+        hours = int(Portal_TimeConsume)
+        minutes = int((Portal_TimeConsume - hours) * 60)
 
-    print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+
+    except ValueError:
+        Portal_TimeConsume = (portal_total_hours / 1)
+
+        # Convert Portal_TimeConsume into hours and minutes
+        hours = int(Portal_TimeConsume)
+        minutes = int((Portal_TimeConsume - hours) * 60)
+
+        print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
 
 
 def PlaceCashier():
@@ -71,13 +93,22 @@ def PlaceCashier():
     Cashier_total_minutes = applicants * 70 / 60
     Cashier_total_hours = Cashier_total_minutes / 60
 
-    Cashier_TimeConsume = (Cashier_total_hours / float(Cashier))
+    try:
+        Cashier_TimeConsume = (Cashier_total_hours / float(Cashier))
 
-    # Convert PACD_TimeConsume into hours and minutes
-    hours = int(Cashier_TimeConsume)
-    minutes = int((Cashier_TimeConsume - hours) * 60)
+        # Convert Cashier_TimeConsume into hours and minutes
+        hours = int(Cashier_TimeConsume)
+        minutes = int((Cashier_TimeConsume - hours) * 60)
 
-    print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+    except ValueError:
+        Cashier_TimeConsume = (Cashier_total_hours / 1)
+
+        # Convert Cashier_TimeConsume into hours and minutes
+        hours = int(Cashier_TimeConsume)
+        minutes = int((Cashier_TimeConsume - hours) * 60)
+
+        print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
 
 
 def PlaceComputer():
@@ -109,9 +140,14 @@ def PlaceComputer():
 
     ExaminationTimeConsume = total_both_card_time_hours / 7 + float(Computer)
 
-    print("Total Blue & Green Card Time (in hours):", ExaminationTimeConsume)
+    # Convert Examination_TimeConsume into hours and minutes
+    hours = int(ExaminationTimeConsume)
+    minutes = int((ExaminationTimeConsume - hours) * 60)
 
-    # To be fixed
+    print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+
+
+# To be fixed
 
 
 
@@ -123,15 +159,25 @@ def PlaceBiometric():
     Biometric_total_minutes = applicants * 40 / 60
     Biometric_total_hours = Biometric_total_minutes / 60
 
-    Biometric_TimeConsume = (Biometric_total_hours / float(Biometric))
+    try:
+        Biometric_TimeConsume = (Biometric_total_hours / float(Biometric))
 
 
-    # Convert PACD_TimeConsume into hours and minutes
-    hours = int(Biometric_TimeConsume)
-    minutes = int((Biometric_TimeConsume - hours) * 60)
+        # Convert PACD_TimeConsume into hours and minutes
+        hours = int(Biometric_TimeConsume)
+        minutes = int((Biometric_TimeConsume - hours) * 60)
 
-    print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
 
+
+    except ValueError:
+        Biometric_TimeConsume = (Biometric_total_hours / 1)
+
+        # Convert PACD_TimeConsume into hours and minutes
+        hours = int(Biometric_TimeConsume)
+        minutes = int((Biometric_TimeConsume - hours) * 60)
+
+        print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
 
 # Item to be added
 PACD = input("Type the number of PACD to be added: ")
