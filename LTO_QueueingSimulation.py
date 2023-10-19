@@ -32,16 +32,20 @@ print("")
 
 
 def PlacePACD():
-    # Consume at least 30 seconds per person; however, there's a queuing
-    # Formula Total Time in MINUTES = (Number of People) x (Time per Person in seconds) / 60
-    # Total Time in HOURS = MINUTES / 60
+    total_time_minutes = 0
+    total_time_hours = 0
+    individual_times = []
 
-    PACD_total_minutes = applicants * 30 / 60
-    PACD_total_hours = PACD_total_minutes / 60
+    for _ in range(applicants):
+        PACD_time_avg = random.randint(30, 60)
+        PACD_total_minutes = PACD_time_avg / 60
+        total_time_minutes += PACD_total_minutes
+        individual_times.append(PACD_time_avg)
 
+    total_time_hours = total_time_minutes / 60
 
     try:
-        PACD_TimeConsume = (PACD_total_hours / (2 + float(PACD)))
+        PACD_TimeConsume = total_time_hours / (2 + float(PACD))
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
@@ -49,8 +53,17 @@ def PlacePACD():
 
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for i, time_avg in enumerate(individual_times, 1):
+            individual_seconds = time_avg
+            individual_minutes = individual_seconds // 60
+            individual_seconds = individual_seconds % 60
+
+            #print each individual timeframe
+            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds))
+
     except ValueError:
-        PACD_TimeConsume = (PACD_total_hours / 2)
+        PACD_TimeConsume = total_time_hours / 2
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
@@ -59,28 +72,30 @@ def PlacePACD():
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
-        PACD_TimeConsume = (PACD_total_hours / 2)
+        PACD_TimeConsume = total_time_hours / 2
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
         minutes = int((PACD_TimeConsume - hours) * 60)
 
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
-
-
-
-
-
 
 
 def PlacePortal():
+    total_time_minutes = 0
+    total_time_hours = 0
+    individual_times = []
 
-    # Consume atleast 1 minute per person = 60 secs
-    portal_total_minutes = applicants * 60 / 60
-    portal_total_hours = portal_total_minutes / 60
+    for _ in range(applicants):
+        PORTAL_time_avg = random.randint(60, 90)
+        PORTAL_total_minutes = PORTAL_time_avg / 60
+        total_time_minutes += PORTAL_total_minutes
+        individual_times.append(PORTAL_time_avg)
+
+    total_time_hours = total_time_minutes / 60
 
     try:
-        Portal_TimeConsume = (portal_total_hours / float(Portal))
+        Portal_TimeConsume = (total_time_hours / float(Portal))
 
         # Convert Portal_TimeConsume into hours and minutes
         hours = int(Portal_TimeConsume)
@@ -88,8 +103,18 @@ def PlacePortal():
 
         print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for i, time_avg in enumerate(individual_times, 1):
+            individual_seconds = time_avg
+            individual_minutes = individual_seconds // 60
+            individual_seconds = individual_seconds % 60
+
+
+            #Print each individual TimeFrame
+            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes,individual_seconds))
+
     except ValueError:
-        Portal_TimeConsume = (portal_total_hours / 1)
+        Portal_TimeConsume = (total_time_hours / 1)
 
         # Convert Portal_TimeConsume into hours and minutes
         hours = int(Portal_TimeConsume)
@@ -98,7 +123,7 @@ def PlacePortal():
         print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
-        Portal_TimeConsume = (portal_total_hours / 1)
+        Portal_TimeConsume = (total_time_hours / 1)
 
         # Convert Portal_TimeConsume into hours and minutes
         hours = int(Portal_TimeConsume)
@@ -156,12 +181,12 @@ def PlaceComputer():
     # Generate random times for blue card applicants and calculate the total time
     for _ in range(blue_card_count):
         time_allocated = random.randint(min_time, max_time)
-        total_blue_card_time += time_allocated
+        total_blue_card_time += time_allocated / 7   # to be fixed
 
     # Generate random times for green card applicants and calculate the total time
     for _ in range(green_card_count):
         time_allocated = random.randint(min_time, max_time)
-        total_green_card_time += time_allocated
+        total_green_card_time += time_allocated / 7    # to be fixed
 
     # Convert the total times from seconds to minutes
     total_both_card_time_minutes = (total_blue_card_time + total_green_card_time) / 60
