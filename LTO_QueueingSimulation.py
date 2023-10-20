@@ -42,10 +42,10 @@ def PlacePACD():
         total_time_minutes += PACD_total_minutes
         individual_times.append(PACD_time_avg)
 
-    total_time_hours = total_time_minutes / 60
+    PACD_total_time_hours = total_time_minutes / 60
 
     try:
-        PACD_TimeConsume = total_time_hours / (2 + float(PACD))
+        PACD_TimeConsume = PACD_total_time_hours / (2 + float(PACD))
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
@@ -63,7 +63,7 @@ def PlacePACD():
             # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds))
 
     except ValueError:
-        PACD_TimeConsume = total_time_hours / 2
+        PACD_TimeConsume = PACD_total_time_hours / 2
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
@@ -72,7 +72,7 @@ def PlacePACD():
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
-        PACD_TimeConsume = total_time_hours / 2
+        PACD_TimeConsume = PACD_total_time_hours / 2
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(PACD_TimeConsume)
@@ -92,10 +92,10 @@ def PlacePortal():
         total_time_minutes += PORTAL_total_minutes
         individual_times.append(PORTAL_time_avg)
 
-    total_time_hours = total_time_minutes / 60
+    PORTAL_total_time_hours = total_time_minutes / 60
 
     try:
-        Portal_TimeConsume = (total_time_hours / float(Portal))
+        Portal_TimeConsume = (PORTAL_total_time_hours / float(Portal))
 
         # Convert Portal_TimeConsume into hours and minutes
         hours = int(Portal_TimeConsume)
@@ -114,7 +114,7 @@ def PlacePortal():
             # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes,individual_seconds))
 
     except ValueError:
-        Portal_TimeConsume = (total_time_hours / 1)
+        Portal_TimeConsume = (PORTAL_total_time_hours / 1)
 
         # Convert Portal_TimeConsume into hours and minutes
         hours = int(Portal_TimeConsume)
@@ -123,7 +123,7 @@ def PlacePortal():
         print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
-        Portal_TimeConsume = (total_time_hours / 1)
+        Portal_TimeConsume = (PORTAL_total_time_hours / 1)
 
         # Convert Portal_TimeConsume into hours and minutes
         hours = int(Portal_TimeConsume)
@@ -133,12 +133,21 @@ def PlacePortal():
 
 
 def PlaceCashier():
-    #consume atleast 1 and 10 secs minute per person = 70 secs
-    Cashier_total_minutes = applicants * 70 / 60
-    Cashier_total_hours = Cashier_total_minutes / 60
+    total_time_minutes = 0
+    total_time_hours = 0
+    individual_times = []
+
+    for _ in range(applicants):
+        CASHIER_time_avg = random.randint(40, 80)  #consume atleast 40secs to 1min and 20secs individual
+        CASHIER_total_minutes = CASHIER_time_avg / 60
+        total_time_minutes += CASHIER_total_minutes
+        individual_times.append(CASHIER_time_avg)
+
+    CASHIER_total_time_hours = total_time_minutes / 60
+
 
     try:
-        Cashier_TimeConsume = (Cashier_total_hours / float(Cashier))
+        Cashier_TimeConsume = (CASHIER_total_time_hours/ float(Cashier))
 
         # Convert Cashier_TimeConsume into hours and minutes
         hours = int(Cashier_TimeConsume)
@@ -146,8 +155,16 @@ def PlaceCashier():
 
         print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for i, time_avg in enumerate(individual_times, 1):
+            individual_seconds = time_avg
+            individual_minutes = individual_seconds // 60
+            individual_seconds = individual_seconds % 60
+            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds))
+
+
     except ValueError:
-        Cashier_TimeConsume = (Cashier_total_hours / 1)
+        Cashier_TimeConsume = (CASHIER_total_time_hours / 1)
 
         # Convert Cashier_TimeConsume into hours and minutes
         hours = int(Cashier_TimeConsume)
@@ -156,7 +173,7 @@ def PlaceCashier():
         print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
-        Cashier_TimeConsume = (Cashier_total_hours / 1)
+        Cashier_TimeConsume = (CASHIER_total_time_hours / 1)
 
         # Convert Cashier_TimeConsume into hours and minutes
         hours = int(Cashier_TimeConsume)
