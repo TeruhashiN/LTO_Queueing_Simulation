@@ -243,15 +243,27 @@ def PlaceComputer():
 
 
 def PlaceBiometric():
-    # Consume at least 40 seconds per person; however, there's a queuing
+
+    # Consume at least 40 - 90 seconds per person; however, there's a queuing
     # Formula Total Time in MINUTES = (Number of People) x (Time per Person in seconds) / 60
     # Total Time in HOURS = MINUTES / 60
 
-    Biometric_total_minutes = applicants * 40 / 60
-    Biometric_total_hours = Biometric_total_minutes / 60
+    total_time_minutes = 0
+    total_time_hours = 0
+    individual_times = []
+
+    for _ in range(applicants):
+        BIOMETRIC_time_avg = random.randint(40, 90)
+        BIOMETRIC_total_minutes = BIOMETRIC_time_avg / 60
+        total_time_minutes += BIOMETRIC_total_minutes
+        individual_times.append(BIOMETRIC_time_avg)
+
+    BIOMETRIC_total_time_hours = total_time_minutes / 60
+
+
 
     try:
-        Biometric_TimeConsume = (Biometric_total_hours / float(Biometric))
+        Biometric_TimeConsume = (BIOMETRIC_total_time_hours / float(Biometric))
 
 
         # Convert PACD_TimeConsume into hours and minutes
@@ -260,9 +272,19 @@ def PlaceBiometric():
 
         print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for i, time_avg in enumerate(individual_times, 1):
+            individual_seconds = time_avg
+            individual_minutes = individual_seconds // 60
+            individual_seconds = individual_seconds % 60
+
+            # Print each individual TimeFrame
+            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes,individual_seconds))
+
+
 
     except ValueError:
-        Biometric_TimeConsume = (Biometric_total_hours / 1)
+        Biometric_TimeConsume = (BIOMETRIC_total_time_hours / 1)
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(Biometric_TimeConsume)
@@ -271,7 +293,7 @@ def PlaceBiometric():
         print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
-        Biometric_TimeConsume = (Biometric_total_hours / 1)
+        Biometric_TimeConsume = (BIOMETRIC_total_time_hours / 1)
 
         # Convert PACD_TimeConsume into hours and minutes
         hours = int(Biometric_TimeConsume)
