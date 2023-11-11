@@ -60,34 +60,53 @@ def Simulation_Mode():
     sim.title("LTO Licensing Queueing System Simulation")
     sim.geometry("1374x751")
     sim.resizable(False, False)
-
-
-    # Set the background color of the main window
     sim.configure(bg="lightblue")
 
-    # Create a frame with a white background
-    frame = Frame(sim, padx=100, pady=330, bg="white")
-    frame.pack(side='left', padx=40, pady=10)  # Set side='left'
+    #PACD Station
+    first_frame = LabelFrame(sim, text="Add Stations", width=1000, height=400)
+    first_frame.grid(row=0, column=0, padx=20, pady=30, sticky="nsew", ipadx=100, ipady=280)# Adjust padx and pady as needed
 
+    PACD_label = Label(first_frame, text="PACD")
+    PACD_label.grid(row=0, column=0)
 
-    # Create a text label inside the frame with a transparent background
-    title_label = Label(frame, text="LTO Licensing Queueing Simulation", fg="blue", bg="white", highlightthickness=0)
-    title_label.pack(pady=1, side="top", anchor="nw", padx=10)  # Set side='top', anchor='nw' for top-left alignment
+    PACD_entry = Entry(first_frame)
+    PACD_entry.grid(row=0, column=1)
 
-    # Create the second frame with a white background
-    frame2 = Frame(sim, padx=400, pady=100, bg="white")
-    frame2.place(relx=0.67, rely=0.8, anchor="center")  # Adjust Y axis using rely
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #Portal Station
+    Portal_label = Label(first_frame, text="Portal")
+    Portal_label.grid(row=1, column=0)
 
+    Portal_entry = Entry(first_frame)
+    Portal_entry.grid(row=1, column=1)
 
-    # Create a button inside the second frame with a transparent background
-    none_label = Button(frame2, text="None", fg="blue", bg="white", highlightthickness=0)
-    none_label.pack(pady=1, side="bottom", anchor="se",padx=10)  # Set side='bottom', anchor='se' for bottom-right alignment
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Cashier Station
+    Cashier_label = Label(first_frame, text="Cashier")
+    Cashier_label.grid(row=2, column=0)
+
+    Cashier_entry = Entry(first_frame)
+    Cashier_entry.grid(row=2, column=1)
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Examination Station
+    Computer_label = Label(first_frame, text="Computer")
+    Computer_label.grid(row=3, column=0)
+
+    Computer_entry = Entry(first_frame)
+    Computer_entry.grid(row=3, column=1)
+
+    # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    # Biometric Station
+    Biometric_label = Label(first_frame, text="Biometric")
+    Biometric_label.grid(row=4, column=0)
+
+    Biometric_entry = Entry(first_frame)
+    Biometric_entry.grid(row=4, column=1)
 
     sim.mainloop()
 
-
 Simulation_Mode()
-
 
 
 
