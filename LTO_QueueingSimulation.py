@@ -62,47 +62,53 @@ def Simulation_Mode():
     sim.resizable(False, False)
     sim.configure(bg="lightblue")
 
-    #PACD Station
-    first_frame = LabelFrame(sim, text="Add Stations", width=1000, height=400)
-    first_frame.grid(row=0, column=0, padx=20, pady=30, sticky="nsew", ipadx=100, ipady=280)# Adjust padx and pady as needed
 
+    #Frame
+    first_frame = LabelFrame(sim, text="Add Stations", width=1000, height=400)
+    first_frame.grid(row=0, column=0, padx=20, pady=30, sticky="nsew", ipadx=100,ipady=280)
+
+    #Text Label
+    title_text = Label(first_frame, text="LTO Licensing Queueing Simulation")
+    title_text.grid(row=0, column=0)
+
+    #PACD Station
     PACD_label = Label(first_frame, text="PACD")
-    PACD_label.grid(row=0, column=0)
+    PACD_label.grid(row=2, column=0)
 
     PACD_entry = Entry(first_frame)
-    PACD_entry.grid(row=0, column=1)
+    PACD_entry.grid(row=2, column=1)
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #Portal Station
     Portal_label = Label(first_frame, text="Portal")
-    Portal_label.grid(row=1, column=0)
+    Portal_label.grid(row=3, column=0)
 
     Portal_entry = Entry(first_frame)
-    Portal_entry.grid(row=1, column=1)
+    Portal_entry.grid(row=3, column=1)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Cashier Station
     Cashier_label = Label(first_frame, text="Cashier")
-    Cashier_label.grid(row=2, column=0)
+    Cashier_label.grid(row=4, column=0)
 
     Cashier_entry = Entry(first_frame)
-    Cashier_entry.grid(row=2, column=1)
+    Cashier_entry.grid(row=4, column=1)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Examination Station
     Computer_label = Label(first_frame, text="Computer")
-    Computer_label.grid(row=3, column=0)
+    Computer_label.grid(row=5, column=0)
 
     Computer_entry = Entry(first_frame)
-    Computer_entry.grid(row=3, column=1)
+    Computer_entry.grid(row=5, column=1)
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Biometric Station
     Biometric_label = Label(first_frame, text="Biometric")
-    Biometric_label.grid(row=4, column=0)
+    Biometric_label.grid(row=6, column=0)
 
     Biometric_entry = Entry(first_frame)
-    Biometric_entry.grid(row=4, column=1)
+    Biometric_entry.grid(row=6, column=1)
 
     sim.mainloop()
 
