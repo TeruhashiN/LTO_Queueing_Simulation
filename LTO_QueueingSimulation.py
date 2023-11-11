@@ -61,12 +61,21 @@ def Simulatin_Mode():
     sim.geometry("1374x751")
     sim.resizable(False, False)
 
+    # Set the background color of the main window
+    sim.configure(bg="lightblue")
+
+    # Create a frame with a white background
+    frame = Frame(sim, padx=100, pady=300, bg="white")
+    frame.pack(side='left', padx=40, pady=10)  # Set side='left'
+
+    # Create a text label inside the frame with a transparent background
+    title_label = Label(frame, text="LTO Licensing Queueing Simulation", fg="blue", bg="white", highlightthickness=0)
+    title_label.pack(pady=1, side="top", anchor="nw", padx=10)  # Set side='top', anchor='nw' for top-left alignment
+
     sim.mainloop()
 
 
-
-
-MAINGUIMODE()
+Simulatin_Mode()
 
 
 
