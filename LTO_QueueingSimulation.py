@@ -15,7 +15,7 @@ def simulation_click():
     #Direct to Simulation Mode
     print("Button clicked to Simulation Mode")
     ins.destroy()
-    Simulatin_Mode()
+    Simulation_Mode()
 
 
 #GUI Mode
@@ -55,27 +55,38 @@ def InstructionMode():
 
     ins.mainloop()
 
-def Simulatin_Mode():
+def Simulation_Mode():
     sim = Tk()
     sim.title("LTO Licensing Queueing System Simulation")
     sim.geometry("1374x751")
     sim.resizable(False, False)
 
+
     # Set the background color of the main window
     sim.configure(bg="lightblue")
 
     # Create a frame with a white background
-    frame = Frame(sim, padx=100, pady=300, bg="white")
+    frame = Frame(sim, padx=100, pady=330, bg="white")
     frame.pack(side='left', padx=40, pady=10)  # Set side='left'
+
 
     # Create a text label inside the frame with a transparent background
     title_label = Label(frame, text="LTO Licensing Queueing Simulation", fg="blue", bg="white", highlightthickness=0)
     title_label.pack(pady=1, side="top", anchor="nw", padx=10)  # Set side='top', anchor='nw' for top-left alignment
 
+    # Create the second frame with a white background
+    frame2 = Frame(sim, padx=400, pady=100, bg="white")
+    frame2.place(relx=0.67, rely=0.8, anchor="center")  # Adjust Y axis using rely
+
+
+    # Create a button inside the second frame with a transparent background
+    none_label = Button(frame2, text="None", fg="blue", bg="white", highlightthickness=0)
+    none_label.pack(pady=1, side="bottom", anchor="se",padx=10)  # Set side='bottom', anchor='se' for bottom-right alignment
+
     sim.mainloop()
 
 
-Simulatin_Mode()
+Simulation_Mode()
 
 
 
