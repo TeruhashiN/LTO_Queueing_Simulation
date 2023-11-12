@@ -1,20 +1,18 @@
 import random
 import time
 import calendar
-from tkinter import *
+from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage
+
 from PIL import ImageTk, Image
 import os
 
-
-
-
-def button_click():
+def guide_butt():
     #Direct to INSTRUCTION GUI
     print("Button clicked!")
     root.destroy()
     InstructionMode()
 
-def simulation_click():
+def goToSimulation_butt():
     #Direct to Simulation Mode
     print("Button clicked to Simulation Mode")
     ins.destroy()
@@ -37,7 +35,7 @@ def MAINGUIMODE():
     image = image.resize((185, 90))  # Remove the ANTIALIAS filter
     photo = ImageTk.PhotoImage(image)
 
-    button = Button(panel, image=photo, command=button_click)
+    button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
     root.mainloop()
 
@@ -53,84 +51,119 @@ def InstructionMode():
     panel = Label(ins, image=ins_img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
-    skip_button = Button(ins, command=simulation_click, text="Start")
-    skip_button.place(relx=0.96, rely=0.98, anchor="w")
+    skip_button = Button(ins, command=goToSimulation_butt, text="Start", width = 10)
+    skip_button.place(relx=0.45, rely=0.98, anchor="w")
 
     ins.mainloop()
 
 
+
+
 def Simulation_Mode():
     global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry
+
+    def on_enter(event):
+        Simulation_Button.configure(bg="#35aefa")  # Change the background color when the mouse enters
+
+    def on_leave(event):
+        Simulation_Button.configure(bg="SystemButtonFace")
+
+    def showResults():
+        SimulationResultButton.grid(row=0, column=0, ipadx=90, padx=10, pady=40, sticky='nsew')
+        title_text2.destroy()
+        #write result code here
+
     sim = Tk()
     sim.title("LTO Licensing Queueing System Simulation")
     sim.geometry("1374x751")
     sim.resizable(False, False)
     sim.configure(bg="lightblue")
 
-    # Frame
+    #background image
+    img = ImageTk.PhotoImage(Image.open("LTO Image/lto_simbg.png"))  # LTO Background
+    panel = Label(sim, image=img)
+    panel.pack(side="bottom", fill="both", expand="yes")
+
+    #font
+    mont_normal = font.Font(family='Montserrat', size=12, weight='normal')
+    mont_bold= font.Font(family='Montserrat', size=12, weight='bold')
+
+    #Frame
     frame_width = 400
-    frame_height = 400
-    first_frame = LabelFrame(sim, text="Add Stations", bd=5)  # Set bd for sizing
+    frame_height = 500
+    first_frame = LabelFrame(sim, bg="#e9e9e9")  # Set bd for sizing
     first_frame.place(x=20, y=30, width=frame_width, height=frame_height)
+    first_frame.columnconfigure(0, minsize=350, weight=1)
+    first_frame.rowconfigure(0, weight=1)
+
+    sec_frameWidth = 800
+    sec_frameHeight = 670
+    sec_frame = LabelFrame(sim, text = "Simulation")
+    sec_frame.place(x=500, y=30, width = sec_frameWidth, height = sec_frameHeight)
 
     #Text Label
-    title_text = Label(first_frame, text="Type any number to add stations")
+    title_text = Label(first_frame, text="Type any number to add stations", font=mont_bold, bg="#e9e9e9")
     title_text.grid(row=0, column=0, padx=5, pady=20)
 
     #PACD Station
-    PACD_label = Label(first_frame, text="PACD")
-    PACD_label.grid(row=2, column=0, padx=20, pady=5)
+    PACD_label = Label(first_frame, text="PACD", font = mont_bold, bg="#e9e9e9")
+    PACD_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
-    PACD_entry = Entry(first_frame, bd=5)
-    PACD_entry.grid(row=2, column=1, padx=20, pady=5)
+    PACD_entry = Entry(first_frame, font=mont_normal, bd=5)
+    PACD_entry.grid(row=1, column=0,ipadx=25, padx=10, pady=10, sticky='ne')
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #Portal Station
-    Portal_label = Label(first_frame, text="Portal")
-    Portal_label.grid(row=3, column=0, padx=20, pady=5)
+    Portal_label = Label(first_frame, text="PORTAL", font=mont_bold, bg="#e9e9e9")
+    Portal_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 
-    Portal_entry = Entry(first_frame, bd=5)
-    Portal_entry.grid(row=3, column=1, padx=20, pady=5)
+    Portal_entry = Entry(first_frame, bd=5, font=mont_normal)
+    Portal_entry.grid(row=2, column=0,ipadx=25, padx=10, pady=10, sticky='ne')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Cashier Station
-    Cashier_label = Label(first_frame, text="Cashier")
-    Cashier_label.grid(row=4, column=0, padx=20, pady=5)
+    Cashier_label = Label(first_frame, text="CASHIER", font=mont_bold, bg="#e9e9e9")
+    Cashier_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
 
-    Cashier_entry = Entry(first_frame, bd=5)
-    Cashier_entry.grid(row=4, column=1, padx=20, pady=5)
+    Cashier_entry = Entry(first_frame, bd=5, font=mont_normal)
+    Cashier_entry.grid(row=3, column=0,ipadx=25, padx=10, pady=10, sticky='ne')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Examination Station
-    Computer_label = Label(first_frame, text="Computer")
-    Computer_label.grid(row=5, column=0, padx=20, pady=5)
+    Computer_label = Label(first_frame, text="COMPUTER", font=mont_bold, bg="#e9e9e9")
+    Computer_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
 
-    Computer_entry = Entry(first_frame, bd=5)
-    Computer_entry.grid(row=5, column=1, padx=20, pady=5)
+    Computer_entry = Entry(first_frame, bd=5, font=mont_normal)
+    Computer_entry.grid(row=4, column=0,ipadx=25, padx=10, pady=10, sticky='ne')
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Biometric Station
-    Biometric_label = Label(first_frame, text="Biometric")
-    Biometric_label.grid(row=6, column=0, padx=20, pady=5)
+    Biometric_label = Label(first_frame, text="BIOMETRIC",font=mont_bold, bg='#e9e9e9')
+    Biometric_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
 
-    Biometric_entry = Entry(first_frame, bd=5)
-    Biometric_entry.grid(row=6, column=1, padx=20, pady=5)
+    Biometric_entry = Entry(first_frame, bd=5, font=mont_normal)
+    Biometric_entry.grid(row=5, column=0,ipadx=25, padx=10, pady=10, sticky='ne')
 
 
-    Simulation_Button = Button(first_frame, text="Simulate", fg="red")
-    Simulation_Button.grid(row=7, column=1, pady=40)
+    Simulation_Button = Button(first_frame, text="SIMULATE", fg="#000000", font=mont_bold, width=10, height=2, bd=5, command=showResults)
+    Simulation_Button.bind("<Enter>", on_enter)
+    Simulation_Button.bind("<Leave>", on_leave)
+    Simulation_Button.grid(row=6, column=0,ipadx=90,padx=10, pady=40, sticky='nsew')
 
-    # Frame 2
+    #Frame2
     frame2_width = 400
     frame2_height = 150
-    first2_frame = LabelFrame(sim, text="Simulation Result", bd=5)  # Set bd for sizing
-    first2_frame.place(x=20, y=500, width=frame2_width, height=frame2_height)
+    first2_frame = LabelFrame(sim, bg="#e9e9e9")  # Set bd for sizing
+    first2_frame.place(x=20, y=550, width=frame2_width, height=frame2_height)
+    first2_frame.columnconfigure(0, minsize=350, weight=1)
+    first2_frame.rowconfigure(20, weight=1)
 
-    SimulationResultText = Label(first2_frame, text="Click for Simulation Result")
-    SimulationResultText.place(x=230, y=40)
+    #Title for results
+    title_text2 = Label(first2_frame, text="Click simulate to generate results", font=mont_bold, bg="#e9e9e9")
+    title_text2.grid(row=0, column=0, padx=5, pady=20)
 
-    SimulationResultButton = Button(first2_frame, text="Simulation Result", fg="blue")
-    SimulationResultButton.place(x=250, y=70)
+    #Button for results (hidden until simulate is clicked)
+    SimulationResultButton = Button(first2_frame, text="View Results", fg="black", font=mont_bold)
 
     sim.mainloop()
 
