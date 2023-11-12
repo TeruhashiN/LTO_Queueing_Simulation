@@ -134,7 +134,18 @@ def Simulation_Mode():
 
     sim.mainloop()
 
-Simulation_Mode()
+
+def simulation_result():
+    simresult = Tk()
+    simresult.title("LTO Licensing Queueing System Simulation")
+    simresult.geometry("1374x751")
+    simresult.resizable(False, False)
+    simresult.configure(bg="lightblue")
+
+
+    simresult.mainloop()
+
+MAINGUIMODE()
 
 
 
