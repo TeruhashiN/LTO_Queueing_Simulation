@@ -185,6 +185,8 @@ def Simulation_Mode():
     title_text2 = Label(first2_frame, text="Click simulate to generate results", font=mont_bold, bg="#e9e9e9")
     title_text2.grid(row=0, column=0, padx=5, pady=20)
 
+
+
     # Button for results (hidden until simulate is clicked)
     SimulationResultButton = Button(first2_frame, command=simulation_result,text="View Results", fg="black", font=mont_bold)
     SimulationResultButton.bind("<Enter>", resultEnter)
@@ -236,6 +238,62 @@ def showHistory():
     historyResult.resizable(False, False)
     center_window(historyResult, 1000, 600)
 
+
+def PlacePACD(pacdNo):
+    global PACD_Queueing_Applicants
+
+    PACD_total_time_minutes = 0
+    PACD_total_time_hours = 0
+    PACD_individual_times = []
+
+
+    for PACD_ in range(pacdNo):
+      PACD_time_avg = random.randint(30, 60)
+      PACD_total_minutes = PACD_time_avg / 60
+      PACD_total_time_minutes += PACD_total_minutes
+      PACD_individual_times.append(PACD_time_avg)
+
+      PACD_total_time_hours = PACD_total_time_minutes / 60
+
+      try:
+         PACD_TimeConsume = PACD_total_time_hours / (2 + float(PACD))
+
+        # Convert PACD_TimeConsume into hours and minutes
+         PACD_hours = int(PACD_TimeConsume)
+         PACD_minutes = int((PACD_TimeConsume - PACD_hours) * 60)
+
+         print("Total PACD Time: {} hours and {} minutes".format(PACD_hours, PACD_minutes))
+
+        # Print individual times
+         for PACD_i, PACD_time_avg in enumerate(PACD_individual_times, 1):
+             PACD_individual_seconds = PACD_time_avg
+             PACD_individual_minutes = PACD_individual_seconds // 60
+             PACD_individual_seconds = PACD_individual_seconds % 60
+
+#             #print each individual timeframe
+             PACD_Queueing_Applicants = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(PACD_i, PACD_time_avg, PACD_individual_minutes, PACD_individual_seconds)
+#
+             print(PACD_Queueing_Applicants)
+#
+#
+      except ValueError:
+          PACD_TimeConsume = PACD_total_time_hours / 2
+#
+#         # Convert PACD_TimeConsume into hours and minutes
+          hours = int(PACD_TimeConsume)
+          minutes = int((PACD_TimeConsume - hours) * 60)
+#
+          print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+#
+      except ZeroDivisionError:
+         PACD_TimeConsume = PACD_total_time_hours / 2
+#
+         # Convert PACD_TimeConsume into hours and minutes
+         hours = int(PACD_TimeConsume)
+         minutes = int((PACD_TimeConsume - hours) * 60)
+#
+         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+
 MAINGUIMODE()
 
 #
@@ -270,60 +328,6 @@ MAINGUIMODE()
 # print("")
 #
 #
-# def PlacePACD():
-#     global PACD_Queueing_Applicants
-#
-#     PACD_total_time_minutes = 0
-#     PACD_total_time_hours = 0
-#     PACD_individual_times = []
-#
-#
-#     for PACD_ in range(applicants):
-#         PACD_time_avg = random.randint(30, 60)
-#         PACD_total_minutes = PACD_time_avg / 60
-#         PACD_total_time_minutes += PACD_total_minutes
-#         PACD_individual_times.append(PACD_time_avg)
-#
-#     PACD_total_time_hours = PACD_total_time_minutes / 60
-#
-#     try:
-#         PACD_TimeConsume = PACD_total_time_hours / (2 + float(PACD))
-#
-#         # Convert PACD_TimeConsume into hours and minutes
-#         PACD_hours = int(PACD_TimeConsume)
-#         PACD_minutes = int((PACD_TimeConsume - PACD_hours) * 60)
-#
-#         print("Total PACD Time: {} hours and {} minutes".format(PACD_hours, PACD_minutes))
-#
-#         # Print individual times
-#         for PACD_i, PACD_time_avg in enumerate(PACD_individual_times, 1):
-#             PACD_individual_seconds = PACD_time_avg
-#             PACD_individual_minutes = PACD_individual_seconds // 60
-#             PACD_individual_seconds = PACD_individual_seconds % 60
-#
-#             #print each individual timeframe
-#             PACD_Queueing_Applicants = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(PACD_i, PACD_time_avg, PACD_individual_minutes, PACD_individual_seconds)
-#
-#             # print(PACD_Queueing_Applicants)
-#
-#
-#     except ValueError:
-#         PACD_TimeConsume = PACD_total_time_hours / 2
-#
-#         # Convert PACD_TimeConsume into hours and minutes
-#         hours = int(PACD_TimeConsume)
-#         minutes = int((PACD_TimeConsume - hours) * 60)
-#
-#         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
-#
-#     except ZeroDivisionError:
-#         PACD_TimeConsume = PACD_total_time_hours / 2
-#
-#         # Convert PACD_TimeConsume into hours and minutes
-#         hours = int(PACD_TimeConsume)
-#         minutes = int((PACD_TimeConsume - hours) * 60)
-#
-#         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 #
 #
 # def PlacePortal():
