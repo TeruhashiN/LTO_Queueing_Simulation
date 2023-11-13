@@ -6,8 +6,6 @@ from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage
 from PIL import ImageTk, Image
 import os
 
-
-
 def guide_butt():
     # Direct to INSTRUCTION GUI
     print("Button clicked!")
@@ -84,8 +82,14 @@ def Simulation_Mode():
     def resultLeave(event):
         SimulationResultButton.configure(bg="SystemButtonFace")
 
+    def historyEnter(event):
+        HistoryButton.configure(bg="#35aefa")  # Change the background color when the mouse enters
+
+    def historyLeave(event):
+        HistoryButton.configure(bg="SystemButtonFace")
+
     def showResults():
-        SimulationResultButton.grid(row=0, column=0, ipadx=90, padx=10, pady=40, sticky='nsew')
+        SimulationResultButton.grid(row=0, column=0, ipadx=84, padx=14, pady=40, sticky='nsew')
         title_text2.destroy()
         # write result code here
 
@@ -110,7 +114,7 @@ def Simulation_Mode():
     frame_width = 400
     frame_height = 500
     first_frame = LabelFrame(sim, bg="#e9e9e9")  # Set bd for sizing
-    first_frame.place(x=20, y=30, width=frame_width, height=frame_height)
+    first_frame.place(x=50, y=30, width=frame_width, height=frame_height)
     first_frame.columnconfigure(0, minsize=350, weight=1)
     first_frame.rowconfigure(0, weight=1)
 
@@ -167,15 +171,15 @@ def Simulation_Mode():
     frame2_width = 400
     frame2_height = 150
     first2_frame = LabelFrame(sim, bg="#e9e9e9")  # Set bd for sizing
-    first2_frame.place(x=20, y=550, width=frame2_width, height=frame2_height)
+    first2_frame.place(x=50, y=550, width=frame2_width, height=frame2_height)
     first2_frame.columnconfigure(0, minsize=350, weight=1)
     first2_frame.rowconfigure(20, weight=1)
 
     # Simulation Animation Frame
-    sec_frameWidth = 800
+    sec_frameWidth = 850
     sec_frameHeight = 670
     sec_frame = LabelFrame(sim)
-    sec_frame.place(x=500, y=30, width=sec_frameWidth, height=sec_frameHeight)
+    sec_frame.place(x=480, y=30, width=sec_frameWidth, height=sec_frameHeight)
 
     # Title for results
     title_text2 = Label(first2_frame, text="Click simulate to generate results", font=mont_bold, bg="#e9e9e9")
@@ -186,35 +190,51 @@ def Simulation_Mode():
     SimulationResultButton.bind("<Enter>", resultEnter)
     SimulationResultButton.bind("<Leave>", resultLeave)
 
+    HistoryButton = Button(first2_frame, command=showHistory, text="History", fg="black",font=mont_bold, width=36)
+    HistoryButton.bind("<Enter>", historyEnter)
+    HistoryButton.bind("<Leave>", historyLeave)
+    HistoryButton.place(x=12,y=100)
 
     sim.mainloop()
 
-
 def simulation_result():
-
     simresult = Tk()
     simresult.title("Simulation Results")
     simresult.geometry("1000x800")
     simresult.resizable(False, False)
-    simresult.configure(bg="#FFFFFF")
     center_window(simresult, 1000, 600)
 
-    mont_normal = font.Font(family='Montserrat', size=12, weight='normal')
-    mont_bold = font.Font(family='Montserrat', size=12, weight='bold')
     # Title Frame
     TFrame_width = 1000
-    TFrame_height = 40
-    TFrame = LabelFrame(simresult,bd=5)  # Set bd for sizing
+    TFrame_height = 50
+    TFrame = LabelFrame(simresult, bd=5)  # Set bd for sizing
     TFrame.place(x=0, y=0, width=TFrame_width, height=TFrame_height)
     TFrame.columnconfigure(0, minsize=350, weight=1)
     TFrame.rowconfigure(20, weight=1)
 
+    #Result Frame
+    ResultFrame_width = 1000
+    ResultFrame_height = 750
+    ResultFrame = LabelFrame(simresult, bd=5, bg='#FFFFFF')
+    ResultFrame.place(x=0, y=50, width=ResultFrame_width, height=ResultFrame_height)
+    TFrame.columnconfigure(0, minsize=500, weight=1)
+    TFrame.rowconfigure(20, weight=1)
+
     # Text Label
-    title_text = Label(TFrame, text="SIMULATION RESULTS", font='Montserrat')
-    title_text.grid(row=0, column=0,padx=5, pady=5, sticky='nsew')
+    title_text = "LTO Licensing Queueing\nSimulation Result"
+    title_ = Label(TFrame, text=title_text, font=("Montserrat", 13, "bold"), bg='white', fg='#092974')
+    title_.grid(row=0, column=0, padx=0, pady=0, sticky='nsew')
+
+
 
     simresult.mainloop()
 
+def showHistory():
+    historyResult = Tk()
+    historyResult.title("Simulation History")
+    historyResult.geometry("1000x600")
+    historyResult.resizable(False, False)
+    center_window(historyResult, 1000, 600)
 
 MAINGUIMODE()
 
