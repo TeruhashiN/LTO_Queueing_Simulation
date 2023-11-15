@@ -453,9 +453,9 @@ def Simulation_Mode():
     center_window(sim, 1374, 751)
 
     # background image
-    # img = ImageTk.PhotoImage(Image.open("LTO Image/lto_simbg.png"))  # LTO Background
-    # panel = Label(sim, image=img)
-    # panel.pack(side="bottom", fill="both", expand="yes")
+    img = ImageTk.PhotoImage(Image.open("LTO Image/lto_simbg.png"))  # LTO Background
+    panel = Label(sim, image=img)
+    panel.pack(side="bottom", fill="both", expand="yes")
 
     # font
     mont_normal = font.Font(family='Montserrat', size=12, weight='normal')
