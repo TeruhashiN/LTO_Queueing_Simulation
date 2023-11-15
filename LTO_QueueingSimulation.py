@@ -2,9 +2,14 @@ import random
 import time
 import calendar
 from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage
+from pygame import mixer
 
 from PIL import ImageTk, Image
 import os
+
+mixer.init()
+mixer.music.load('MusicBackground/music_background.mp3')
+mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -607,7 +612,8 @@ def showHistory():
     center_window(historyResult, 1000, 600)
 
 
-Simulation_Mode()
+# Simulation_Mode()
+MAINGUIMODE()
 
 
 
