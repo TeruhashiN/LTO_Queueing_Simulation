@@ -644,11 +644,11 @@ def simulation_result():
 def ApplicantResult():
     # Gonna fix it later
 
-    student_permit_label.config(text=f"Student Permit Applicants: {int(yellow_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
-    NonPro_Label.config(text=f"Non-Pro License Applicants: {int(blue_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
-    RenewLicense_Label.config(text=f"Renew License Applicants: {int(green_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
-    Miscellaneous_Label.config(text=f"Miscellaneous Applicants: {int(orange_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
-    total_applicants_label.config(text=f"Total Applicants: {applicants}", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    student_permit_label.config(text=f"Student Permit Applicants: {int(yellow_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+    NonPro_Label.config(text=f"Non-Pro License Applicants: {int(blue_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+    RenewLicense_Label.config(text=f"Renew License Applicants: {int(green_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+    Miscellaneous_Label.config(text=f"Miscellaneous Applicants: {int(orange_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+    total_applicants_label.config(text=f"Total Applicants: {applicants}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
 
 def on_scroll(*args):
     # Function to handle scrolling events
