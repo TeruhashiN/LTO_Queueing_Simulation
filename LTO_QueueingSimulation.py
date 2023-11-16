@@ -1,12 +1,18 @@
 import random
 import time
 import calendar
-from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage
+from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage, Scrollbar, Listbox
 from pygame import mixer
 
 from PIL import ImageTk, Image
 import os
 
+# Global variable to store the history results
+history_results = []
+Portal_history_results = []
+
+
+#Music Play
 mixer.init()
 mixer.music.load('MusicBackground/music_background.mp3')
 mixer.music.play()
@@ -36,6 +42,7 @@ orange_card = applicants * 0.14
 
 
 def PlacePACD():
+    global PACD_history_result
     total_time_minutes = 0
     total_time_hours = 0
     individual_times = []
@@ -65,7 +72,9 @@ def PlacePACD():
             individual_seconds = individual_seconds % 60
 
             #print each individual timeframe
-            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds))
+            PACD_history_result = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds)
+            print(PACD_history_result)
+            history_results.append(PACD_history_result)
 
     except ValueError:
         PACD_TimeConsume = PACD_total_time_hours / 2
@@ -86,6 +95,7 @@ def PlacePACD():
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
 def PlacePortal():
+    global Portal_history_result
     Portal_total_time_minutes = 0
     Portal_total_time_hours = 0
     Portal_individual_times = []
@@ -118,7 +128,9 @@ def PlacePortal():
             #Print each individual TimeFrame
 
 
-            # print("Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i, Portal_time_avg, Portal_individual_minutes,  Portal_individual_seconds))
+            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i, Portal_time_avg, Portal_individual_minutes,  Portal_individual_seconds)
+            print(Portal_history_result)
+            Portal_history_results.append(Portal_history_result)
 
 
 
@@ -338,6 +350,7 @@ def MAINGUIMODE():
     global root
     root = Tk()
     root.title("LTO Licensing Queueing System Simulation")
+    root.iconbitmap('LTO Image/LTO Logo.ico')
     root.geometry("1374x751")
     root.resizable(False, False)
     center_window(root, 1374, 751)
@@ -360,6 +373,7 @@ def InstructionMode():
     ins = Tk()
     ins.title("LTO Licensing Queueing System Simulation")
     ins.geometry("1093x800")
+    ins.iconbitmap('LTO Image/LTO Logo.ico')
     ins.resizable(False, False)
     center_window(ins, 1093, 800)
 
@@ -374,7 +388,7 @@ def InstructionMode():
 
 
 def Simulation_Mode():
-    global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry
+    global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry, Simulation_Button
     def simulateButtonEnter(event):
         Simulation_Button.configure(bg="#35aefa")  # Change the background color when the mouse enters
 
@@ -394,6 +408,7 @@ def Simulation_Mode():
         HistoryButton.configure(bg="SystemButtonFace")
 
     def showResults():
+        Simulation_Button.configure(state='disabled')  # Disable the Simulation_Button
         SimulationResultButton.grid(row=0, column=0, ipadx=84, padx=14, pady=40, sticky='nsew')
         title_text2.destroy()
         # write result code here
@@ -452,6 +467,7 @@ def Simulation_Mode():
 
     sim = Tk()
     sim.title("LTO Licensing Queueing System Simulation")
+    sim.iconbitmap('LTO Image/LTO Logo.ico')
     sim.geometry("1374x751")
     sim.resizable(False, False)
     sim.configure(bg="lightblue")
@@ -573,9 +589,11 @@ def Simulation_Mode():
     sim.mainloop()
 
 def simulation_result():
+    global total_applicants_label, student_permit_label, NonPro_Label,RenewLicense_Label, Miscellaneous_Label
     simresult = Tk()
     simresult.title("Simulation Results")
     simresult.geometry("1000x800")
+    simresult.iconbitmap('LTO Image/LTO Logo.ico')
     simresult.resizable(False, False)
     center_window(simresult, 1000, 600)
 
@@ -601,19 +619,95 @@ def simulation_result():
     title_.grid(row=0, column=0, padx=0, pady=0, sticky='nsew')
 
 
+    student_permit_label = Label(simresult, text="Student Permit Applicants: ", font=("Montserrat", 11, "italic"), bg='white', fg='#440d31')
+    student_permit_label.place(x=30, y=70)
+
+    NonPro_Label = Label(simresult, text="Non-Pro License Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    NonPro_Label.place(x=30, y=120)
+
+    RenewLicense_Label = Label(simresult, text="Renew License Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    RenewLicense_Label.place(x=30, y=170)
+
+    Miscellaneous_Label = Label(simresult, text="Miscellaneous Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    Miscellaneous_Label.place(x=30, y=220)
+
+    total_applicants_label = Label(simresult, text="Total Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    total_applicants_label.place(x=30, y=290)
+
+    # This will make the ApplicantResult Run
+    ApplicantResult()
+
 
     simresult.mainloop()
+
+
+def ApplicantResult():
+    # Gonna fix it later
+
+    student_permit_label.config(text=f"Student Permit Applicants: {int(yellow_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
+    NonPro_Label.config(text=f"Non-Pro License Applicants: {int(blue_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
+    RenewLicense_Label.config(text=f"Renew License Applicants: {int(green_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
+    Miscellaneous_Label.config(text=f"Miscellaneous Applicants: {int(orange_card)}", font=("Montserrat", 11, "italic"), bg='white',fg='#440d31')
+    total_applicants_label.config(text=f"Total Applicants: {applicants}", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+
+def on_scroll(*args):
+    # Function to handle scrolling events
+    # You can perform actions based on the scroll position here
+    pass
 
 def showHistory():
     historyResult = Tk()
     historyResult.title("Simulation History")
+    historyResult.iconbitmap('LTO Image/LTO Logo.ico')
     historyResult.geometry("1000x600")
     historyResult.resizable(False, False)
     center_window(historyResult, 1000, 600)
 
+    # Title Frame
+    FFrame_width = 1000
+    FFrame_height = 50
+    FFrame = LabelFrame(historyResult, bd=5)  # Set bd for sizing
+    FFrame.place(x=0, y=0, width=FFrame_width, height=FFrame_height)
+    FFrame.columnconfigure(0, minsize=350, weight=1)
+    FFrame.rowconfigure(20, weight=1)
 
-# Simulation_Mode()
-MAINGUIMODE()
+    # Result Frame
+    HistoryResultFrame_width = 1000
+    HistoryResultFrame_height = 750
+    HistoryResultFrame = LabelFrame(historyResult, bd=5, bg='#FFFFFF')
+    HistoryResultFrame.place(x=0, y=50, width=HistoryResultFrame_width, height=HistoryResultFrame_height)
+    FFrame.columnconfigure(0, minsize=500, weight=1)
+    FFrame.rowconfigure(20, weight=1)
+
+    # Text Label
+    historytitle_text = "LTO Licensing Queueing\nApplicant History"
+    historytitle_ = Label(FFrame, text=historytitle_text, font=("Montserrat", 13, "bold"), bg='white', fg='#AF5FD7')
+    historytitle_.grid(row=0, column=0, padx=0, pady=0, sticky='nsew')
+
+    # Create a vertical scrollbar
+    scrollbar = Scrollbar(HistoryResultFrame, orient="vertical", command=on_scroll)
+
+    # Create a widget (e.g., Listbox or Text) that you want to attach the scrollbar to
+    listbox = Listbox(HistoryResultFrame, yscrollcommand=scrollbar.set)
+
+    # Concatenate the two lists
+    all_history_results = history_results + Portal_history_results
+
+    # Add items to the listbox
+    for result in all_history_results:
+        listbox.insert("end", result)
+
+    # Pack the widgets
+    listbox.pack(side="left", fill="both", expand=True)
+    scrollbar.pack(side="right", fill="y")
+
+    # Set the scrollbar to operate on the listbox
+    scrollbar.config(command=listbox.yview)
+
+
+# simulation_result()
+Simulation_Mode()
+# MAINGUIMODE()
 
 
 
