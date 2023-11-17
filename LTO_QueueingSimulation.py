@@ -3,7 +3,7 @@ import time
 import calendar
 from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage, Scrollbar, Listbox
 from pygame import mixer
-
+import sys
 from PIL import ImageTk, Image
 import os
 
@@ -338,20 +338,26 @@ def goToSimulation_butt():
     # Direct to Simulation Mode
     print("Button clicked to Simulation Mode")
     ins.destroy()
-    Simulation_Mode()
+    #Simulation_Mode()
 
 def center_window(window, width, height):
     screen_width = window.winfo_screenwidth()
     screen_height = window.winfo_screenheight()
 
     x = (screen_width - width) // 2
-    y = (screen_height - height) // 2
+    y = (screen_height - height) // 2 - 40
 
     window.geometry(f"{width}x{height}+{x}+{y}")
+
 
 # GUI Mode
 def MAINGUIMODE():
     global root
+
+    def on_exit():
+        root.destroy()
+        sys.exit()
+
     root = Tk()
     root.title("LTO Licensing Queueing System Simulation")
     root.iconbitmap('LTO Image/LTO Logo.ico')
@@ -369,17 +375,25 @@ def MAINGUIMODE():
 
     button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
+
+    # Bind the window closing event to the on_closing function
+    root.protocol("WM_DELETE_WINDOW", on_exit)
     root.mainloop()
 
 
 def InstructionMode():
     global ins
+
+    def on_exit():
+        ins.destroy()
+        sys.exit()
+
     ins = Tk()
     ins.title("LTO Licensing Queueing System Simulation")
     ins.geometry("1093x800")
     ins.iconbitmap('LTO Image/LTO Logo.ico')
     ins.resizable(False, False)
-    center_window(ins, 1093, 800)
+    center_window(ins, 1093, 780)
 
     ins_img = ImageTk.PhotoImage(Image.open("LTO Image/LTO_Instruction.png"))  # LTO Instruction Background
     panel = Label(ins, image=ins_img)
@@ -388,11 +402,14 @@ def InstructionMode():
     skip_button = Button(ins, command=goToSimulation_butt, text="Start", width=20)
     skip_button.place(relx=0.45, rely=0.98, anchor="w")
 
+    # Bind the window closing event to the on_closing function
+    ins.protocol("WM_DELETE_WINDOW", on_exit)
+
     ins.mainloop()
 
 
 def Simulation_Mode():
-    global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry, Simulation_Button
+    global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry, Simulation_Button, img
     def simulateButtonEnter(event):
         Simulation_Button.configure(bg="#35aefa")  # Change the background color when the mouse enters
 
@@ -467,7 +484,9 @@ def Simulation_Mode():
             Biometric_entry.insert(0, "Enter number")
             Biometric_entry.config(fg="gray")
 
-
+    def on_exit_click():
+        sim.destroy()
+        sys.exit()
 
     sim = Tk()
     sim.title("LTO Licensing Queueing System Simulation")
@@ -476,6 +495,7 @@ def Simulation_Mode():
     sim.resizable(False, False)
     sim.configure(bg="lightblue")
     center_window(sim, 1374, 751)
+
 
     # background image
     img = ImageTk.PhotoImage(Image.open("LTO Image/lto_simbg.png"))  # LTO Background
@@ -590,7 +610,10 @@ def Simulation_Mode():
     HistoryButton.bind("<Leave>", historyLeave)
     HistoryButton.place(x=12,y=100)
 
+    # Register the on_exit_click function to handle window closing
+    sim.protocol("WM_DELETE_WINDOW", on_exit_click)
     sim.mainloop()
+
 
 def simulation_result():
     global total_applicants_label, student_permit_label, NonPro_Label,RenewLicense_Label, Miscellaneous_Label
@@ -601,6 +624,9 @@ def simulation_result():
     simresult.resizable(False, False)
     center_window(simresult, 1000, 600)
 
+    def on_closing():
+        simresult.destroy()
+        sys.exit()
     # Title Frame
     TFrame_width = 1000
     TFrame_height = 50
@@ -651,9 +677,8 @@ def simulation_result():
     FailedExaminees_Label = Label(simresult, text="Failed Examinees: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
     FailedExaminees_Label.place(x=400, y=220)
 
-
-
-
+    # Bind the window closing event to the on_closing function
+    root.protocol("WM_DELETE_WINDOW", on_closing)
 
 
     # This will make the ApplicantResult Run
@@ -728,8 +753,8 @@ def showHistory():
 
 
 # simulation_result()
+MAINGUIMODE()
 Simulation_Mode()
-# MAINGUIMODE()
 
 
 
