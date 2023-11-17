@@ -10,6 +10,9 @@ import os
 # Global variable to store the history results
 history_results = []
 Portal_history_results = []
+Cashier_history_results = []
+Computer_history_results = []
+Biometric_history_results = []
 
 
 #Music Play
@@ -181,8 +184,8 @@ def PlaceCashier():
             Cashier_individual_seconds = Cashier_time_avg
             Cashier_individual_minutes = Cashier_individual_seconds // 60
             Cashier_individual_seconds = Cashier_individual_seconds % 60
-            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(Cashier_i, Cashier_time_avg, Cashier_individual_minutes, Cashier_individual_seconds))
-
+            Cashier_history_result = "Cashier Applicant {}: {} seconds ({} minutes and {} seconds)".format(Cashier_i, Cashier_time_avg, Cashier_individual_minutes, Cashier_individual_seconds)
+            Cashier_history_results.append(Cashier_history_result)
 
     except ValueError:
         Cashier_TimeConsume = (Cashier_total_time_hours / 1)
@@ -301,7 +304,8 @@ def PlaceBiometric():
             Biometric_individual_seconds = Biometric_individual_seconds % 60
 
             # print each individual timeframe
-            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds))
+            Biometric_history_result = "Biometric Applicant {}: {} seconds ({} minutes and {} seconds)".format(Biometric_i, Biometric_time_avg, Biometric_individual_minutes, Biometric_individual_seconds)
+            Biometric_history_results.append(Biometric_history_result)
 
 
 
@@ -625,14 +629,32 @@ def simulation_result():
     NonPro_Label = Label(simresult, text="Non-Pro License Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
     NonPro_Label.place(x=30, y=120)
 
-    RenewLicense_Label = Label(simresult, text="Renew License Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    RenewLicense_Label = Label(simresult, text="Renew License Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
     RenewLicense_Label.place(x=30, y=170)
 
-    Miscellaneous_Label = Label(simresult, text="Miscellaneous Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    Miscellaneous_Label = Label(simresult, text="Miscellaneous Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
     Miscellaneous_Label.place(x=30, y=220)
 
-    total_applicants_label = Label(simresult, text="Total Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
+    total_applicants_label = Label(simresult, text="Total Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
     total_applicants_label.place(x=30, y=290)
+
+    # Next Row
+    AddedStationLabel = Label(simresult, text="Added Station: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    AddedStationLabel.place(x=400, y=70)
+
+    ProblemEncounter_Label = Label(simresult, text="Problem Encounter: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    ProblemEncounter_Label.place(x=400, y=120)
+
+    RejectedApplicants_Label = Label(simresult, text="Rejected Applicants: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    RejectedApplicants_Label.place(x=400, y=170)
+
+    FailedExaminees_Label = Label(simresult, text="Failed Examinees: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    FailedExaminees_Label.place(x=400, y=220)
+
+
+
+
+
 
     # This will make the ApplicantResult Run
     ApplicantResult()
@@ -691,7 +713,7 @@ def showHistory():
     listbox = Listbox(HistoryResultFrame, yscrollcommand=scrollbar.set)
 
     # Concatenate the two lists
-    all_history_results = history_results + Portal_history_results
+    all_history_results = history_results + Portal_history_results + Cashier_history_results + Biometric_history_results
 
     # Add items to the listbox
     for result in all_history_results:
