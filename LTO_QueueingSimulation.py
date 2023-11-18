@@ -529,6 +529,12 @@ def Simulation_Mode():
 
     def showResults():
         Simulation_Button.configure(state='disabled')  # Disable the Simulation_Button
+        PACD_entry.configure(state='disabled')
+        Portal_entry.configure(state='disabled')
+        Cashier_entry.configure(state='disabled')
+        Computer_entry.configure(state='disabled')
+        Biometric_entry.configure(state='disabled')
+
         SimulationResultButton.grid(row=0, column=0, ipadx=84, padx=14, pady=40, sticky='nsew')
         title_text2.destroy()
         # write result code here
@@ -730,6 +736,7 @@ def simulation_result():
     def on_closing():
         simresult.destroy()
         sys.exit()
+
     # Title Frame
     TFrame_width = 1000
     TFrame_height = 50
