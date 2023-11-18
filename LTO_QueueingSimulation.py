@@ -616,7 +616,11 @@ def Simulation_Mode():
 
 
 def simulation_result():
-    global total_applicants_label, student_permit_label, NonPro_Label,RenewLicense_Label, Miscellaneous_Label
+    global total_applicants_label, student_permit_label, NonPro_Label,RenewLicense_Label, \
+        Miscellaneous_Label, AddedStationLabel, ProblemEncounter_Label, RejectedApplicants_Label, \
+    FailedExaminees_Label, avgStudent_Permit_Label, avgNonPro_Label, avgRenewal_Label, avgMisc_label
+
+
     simresult = Tk()
     simresult.title("Simulation Results")
     simresult.geometry("1000x800")
@@ -650,32 +654,48 @@ def simulation_result():
 
 
     student_permit_label = Label(simresult, text="Student Permit Applicants: ", font=("Montserrat", 11, "italic"), bg='white', fg='#440d31')
-    student_permit_label.place(x=30, y=70)
+    student_permit_label.place(x=30, y=120)
 
     NonPro_Label = Label(simresult, text="Non-Pro License Applicants: ", font=("Montserrat", 11, "italic"),bg='white', fg='#440d31')
-    NonPro_Label.place(x=30, y=120)
+    NonPro_Label.place(x=30, y=170)
 
     RenewLicense_Label = Label(simresult, text="Renew License Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
-    RenewLicense_Label.place(x=30, y=170)
+    RenewLicense_Label.place(x=30, y=220)
 
     Miscellaneous_Label = Label(simresult, text="Miscellaneous Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
-    Miscellaneous_Label.place(x=30, y=220)
+    Miscellaneous_Label.place(x=30, y=270)
 
     total_applicants_label = Label(simresult, text="Total Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
-    total_applicants_label.place(x=30, y=290)
+    total_applicants_label.place(x=30, y=370)
 
     # Next Row
     AddedStationLabel = Label(simresult, text="Added Station: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    AddedStationLabel.place(x=400, y=70)
+    AddedStationLabel.place(x=400, y=120)
 
     ProblemEncounter_Label = Label(simresult, text="Problem Encounter: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    ProblemEncounter_Label.place(x=400, y=120)
+    ProblemEncounter_Label.place(x=400, y=170)
 
     RejectedApplicants_Label = Label(simresult, text="Rejected Applicants: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    RejectedApplicants_Label.place(x=400, y=170)
+    RejectedApplicants_Label.place(x=400, y=220)
 
     FailedExaminees_Label = Label(simresult, text="Failed Examinees: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    FailedExaminees_Label.place(x=400, y=220)
+    FailedExaminees_Label.place(x=400, y=270)
+
+    #Third Row
+    IndividualAverage_Label = Label(simresult, text="Individual Average Time ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    IndividualAverage_Label.place(x=730, y=70)
+
+    avgStudent_Permit_Label = Label(simresult, text="Student permit: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    avgStudent_Permit_Label.place(x=750, y=120)
+
+    avgNonPro_Label = Label(simresult, text="Non-Pro License: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    avgNonPro_Label.place(x=750, y=170)
+
+    avgRenewal_Label = Label(simresult, text="Renewal License: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    avgRenewal_Label.place(x=750, y=220)
+
+    avgMisc_label = Label(simresult, text="Miscellaneous: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    avgMisc_label.place(x=750, y=270)
 
     # This will make the ApplicantResult Run
     ApplicantResult()
@@ -749,7 +769,7 @@ def showHistory():
 
 
 # simulation_result()
-MAINGUIMODE()
+# MAINGUIMODE()
 Simulation_Mode()
 
 
