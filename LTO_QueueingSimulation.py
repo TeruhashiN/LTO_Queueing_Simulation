@@ -1,7 +1,7 @@
 import random
 import time
 import calendar
-from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage, Scrollbar, Listbox
+from tkinter import Tk, Label, Button, Entry, LabelFrame, font, PhotoImage, Scrollbar, Listbox, Toplevel, messagebox
 from pygame import mixer
 import sys
 from PIL import ImageTk, Image
@@ -42,6 +42,38 @@ yellow_card = applicants * 0.34
 blue_card = applicants * 0.28
 green_card = applicants * 0.24
 orange_card = applicants * 0.14
+
+
+# Information Widget
+class ToolTip:
+    def __init__(self, widget, text):
+        self.widget = widget
+        self.text = text
+        self.tooltip = None
+        self.widget.bind("<Enter>", self.show_tooltip)
+        self.widget.bind("<Leave>", self.hide_tooltip)
+
+    def show_tooltip(self, event):
+        x, y, _, _ = self.widget.bbox("insert")
+        x += self.widget.winfo_rootx() + 25
+        y += self.widget.winfo_rooty() + 20
+
+        self.tooltip = Toplevel(self.widget)
+        self.tooltip.wm_overrideredirect(True)
+        self.tooltip.wm_geometry(f"+{x}+{y}")
+
+        label = Label(self.tooltip, text=self.text, background="#ffffe0", relief="solid", borderwidth=1)
+        label.pack(ipadx=1)
+
+    def hide_tooltip(self, event):
+        if self.tooltip:
+            self.tooltip.destroy()
+            self.tooltip = None
+
+def show_info():
+    messagebox.showinfo("Information", "Public Assistance Complaint Desk(PACD) currently have 2 LTO Worker that handle your documents."
+                                       "By checking the documents, they are the one who will give you the Color card based on your designated.")
+
 
 
 def PlacePACD():
@@ -627,6 +659,14 @@ def Simulation_Mode():
     # PACD Station
     PACD_label = Label(first_frame, text="PACD", font=mont_bold, bg="#e9e9e9")
     PACD_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
+
+    # Label Icon Question
+    info_label = Label(first_frame, text="?", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
+    info_label.grid(row=1, column=0, padx=100, pady=10, sticky='w')
+    ToolTip(info_label, "Click for information")
+    info_label.bind("<Button-1>", lambda event: show_info())
+
+
 
     PACD_entry = Entry(first_frame, font=mont_normal, bd=5)
     PACD_entry.grid(row=1, column=0, ipadx=25, padx=10, pady=10, sticky='ne')
