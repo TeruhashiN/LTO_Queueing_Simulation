@@ -15,10 +15,10 @@ Computer_history_results = []
 Biometric_history_results = []
 
 
-#Music Play
-mixer.init()
-mixer.music.load('MusicBackground/music_background.mp3')
-mixer.music.play()
+# #Music Play
+# mixer.init()
+# mixer.music.load('MusicBackground/music_background.mp3')
+# mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,12 +69,6 @@ class ToolTip:
         if self.tooltip:
             self.tooltip.destroy()
             self.tooltip = None
-
-def show_info():
-    messagebox.showinfo("Information", "Public Assistance Complaint Desk(PACD) currently have 2 LTO Worker that handle your documents."
-                                       "By checking the documents, they are the one who will give you the Color card based on your designated.")
-
-
 
 def PlacePACD():
     global PACD_history_result
@@ -469,7 +463,7 @@ def goToSimulation_butt():
     # Direct to Simulation Mode
     print("Button clicked to Simulation Mode")
     ins.destroy()
-    #Simulation_Mode()
+    Simulation_Mode()
 
 def center_window(window, width, height):
     screen_width = window.winfo_screenwidth()
@@ -506,6 +500,9 @@ def MAINGUIMODE():
 
     button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
+
+    alphatest = Label(panel, text="Keima Test 1.1",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest.place(x=1250,y=710)
 
     # Bind the window closing event to the on_closing function
     root.protocol("WM_DELETE_WINDOW", on_exit)
@@ -621,6 +618,32 @@ def Simulation_Mode():
             Biometric_entry.insert(0, "Enter number")
             Biometric_entry.config(fg="gray")
 
+    def show_info():
+        messagebox.showinfo("Information",
+                            "Public Assistance Complaint Desk(PACD) currently have 2 LTO Worker that handle your documents."
+                            "By checking the documents, they are the one who will give you the Color card based on your designated.")
+
+    def Portal_show_info():
+        messagebox.showinfo("Information","Portal")
+
+    def Cashier_show_info():
+        messagebox.showinfo("Information","Cashier")
+
+    def Computer_show_info():
+        messagebox.showinfo("Information","Computer")
+
+    def Biometric_show_info():
+        messagebox.showinfo("Information","Biometric")
+
+    def restart_program():
+        result = messagebox.askyesno("Restart", "Do you really want to restart the program?")
+        if result:
+            sim.destroy()
+            time.sleep(1)
+            Simulation_Mode()
+            print("Restarting the program")
+
+
     def on_exit_click():
         sim.destroy()
         sys.exit()
@@ -639,6 +662,9 @@ def Simulation_Mode():
     panel = Label(sim, image=img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
+    alphatest = Label(panel, text="Keima Test 1.1", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest.place(x=1215, y=710)
+
     # font
     mont_normal = font.Font(family='Montserrat', size=12, weight='normal')
     mont_bold = font.Font(family='Montserrat', size=12, weight='bold')
@@ -652,6 +678,13 @@ def Simulation_Mode():
     first_frame.columnconfigure(0, minsize=350, weight=1)
     first_frame.rowconfigure(0, weight=1)
 
+
+    simage_path = 'LTO Image/restart.png'
+    simg = PhotoImage(file=simage_path)
+
+    restart_button = Button(first_frame, text="Restart", image=simg, command=restart_program, width=30, height=30)
+    restart_button.place(x=5, y=5)
+
     # Text Label
     title_text = Label(first_frame, text="LTO SIMULATION", font=mont_Large, bg="#e9e9e9")
     title_text.grid(row=0, column=0, padx=5, pady=20)
@@ -661,12 +694,10 @@ def Simulation_Mode():
     PACD_label.grid(row=1, column=0, padx=10, pady=10, sticky='w')
 
     # Label Icon Question
-    info_label = Label(first_frame, text="?", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
-    info_label.grid(row=1, column=0, padx=100, pady=10, sticky='w')
-    ToolTip(info_label, "Click for information")
-    info_label.bind("<Button-1>", lambda event: show_info())
-
-
+    PACD_info_label = Label(first_frame, text="ⓘ", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
+    PACD_info_label.grid(row=1, column=0, padx=110, pady=10, sticky='w')
+    ToolTip(PACD_info_label, "Click for information")
+    PACD_info_label.bind("<Button-1>", lambda event: show_info())
 
     PACD_entry = Entry(first_frame, font=mont_normal, bd=5)
     PACD_entry.grid(row=1, column=0, ipadx=25, padx=10, pady=10, sticky='ne')
@@ -679,6 +710,12 @@ def Simulation_Mode():
     Portal_label = Label(first_frame, text="PORTAL", font=mont_bold, bg="#e9e9e9")
     Portal_label.grid(row=2, column=0, padx=10, pady=10, sticky='w')
 
+    # Label Icon Question
+    Portal_info_label = Label(first_frame, text="ⓘ", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
+    Portal_info_label.grid(row=2, column=0, padx=110, pady=10, sticky='w')
+    ToolTip(Portal_info_label, "Click for information")
+    Portal_info_label.bind("<Button-1>", lambda event: Portal_show_info())
+
     Portal_entry = Entry(first_frame, bd=5, font=mont_normal)
     Portal_entry.grid(row=2, column=0, ipadx=25, padx=10, pady=10, sticky='ne')
     Portal_entry.insert(0, 'Enter number')
@@ -689,6 +726,12 @@ def Simulation_Mode():
     # Cashier Station
     Cashier_label = Label(first_frame, text="CASHIER", font=mont_bold, bg="#e9e9e9")
     Cashier_label.grid(row=3, column=0, padx=10, pady=10, sticky='w')
+
+    # Label Icon Question
+    Cashier_info_label = Label(first_frame, text="ⓘ", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
+    Cashier_info_label.grid(row=3, column=0, padx=110, pady=10, sticky='w')
+    ToolTip(Cashier_info_label, "Click for information")
+    Cashier_info_label.bind("<Button-1>", lambda event: Cashier_show_info())
 
     Cashier_entry = Entry(first_frame, bd=5, font=mont_normal)
     Cashier_entry.grid(row=3, column=0, ipadx=25, padx=10, pady=10, sticky='ne')
@@ -701,6 +744,12 @@ def Simulation_Mode():
     Computer_label = Label(first_frame, text="COMPUTER", font=mont_bold, bg="#e9e9e9")
     Computer_label.grid(row=4, column=0, padx=10, pady=10, sticky='w')
 
+    # Label Icon Question
+    Computer_info_label = Label(first_frame, text="ⓘ", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
+    Computer_info_label.grid(row=4, column=0, padx=110, pady=10, sticky='w')
+    ToolTip(Computer_info_label, "Click for information")
+    Computer_info_label.bind("<Button-1>", lambda event: Computer_show_info())
+
     Computer_entry = Entry(first_frame, bd=5, font=mont_normal)
     Computer_entry.grid(row=4, column=0, ipadx=25, padx=10, pady=10, sticky='ne')
     Computer_entry.insert(0, 'Enter number')
@@ -711,6 +760,12 @@ def Simulation_Mode():
     # Biometric Station
     Biometric_label = Label(first_frame, text="BIOMETRIC", font=mont_bold, bg='#e9e9e9')
     Biometric_label.grid(row=5, column=0, padx=10, pady=10, sticky='w')
+
+    # Label Icon Question
+    Biometric_info_label = Label(first_frame, text="ⓘ", font=("Arial", 12), cursor="question_arrow", bg='#e9e9e9')
+    Biometric_info_label.grid(row=5, column=0, padx=110, pady=10, sticky='w')
+    ToolTip(Biometric_info_label, "Click for information")
+    Biometric_info_label.bind("<Button-1>", lambda event: Biometric_show_info())
 
     Biometric_entry = Entry(first_frame, bd=5, font=mont_normal)
     Biometric_entry.grid(row=5, column=0, ipadx=25, padx=10, pady=10, sticky='ne')
@@ -742,8 +797,6 @@ def Simulation_Mode():
     # Title for results
     title_text2 = Label(first2_frame, text="Click simulate to generate results", font=mont_bold, bg="#e9e9e9")
     title_text2.grid(row=0, column=0, padx=5, pady=20)
-
-
 
     # Button for results (hidden until simulate is clicked)
     SimulationResultButton = Button(first2_frame, command=simulation_result,text="View Results", fg="black", font=mont_bold)

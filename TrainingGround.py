@@ -1,48 +1,29 @@
-import tkinter as tk
-from tkinter import messagebox
+from tkinter import Tk, Button, PhotoImage
 
+def restart_program():
+    print("Restarting the program")
 
-class ToolTip:
-    def __init__(self, widget, text):
-        self.widget = widget
-        self.text = text
-        self.tooltip = None
-        self.widget.bind("<Enter>", self.show_tooltip)
-        self.widget.bind("<Leave>", self.hide_tooltip)
+def toggle_visibility():
+    if restart_button.winfo_ismapped():
+        restart_button.pack_forget()
+    else:
+        restart_button.pack()
 
-    def show_tooltip(self, event):
-        x, y, _, _ = self.widget.bbox("insert")
-        x += self.widget.winfo_rootx() + 25
-        y += self.widget.winfo_rooty() + 20
+# Create the main Tkinter window
+root = Tk()
+root.title("Restart Button Example")
 
-        self.tooltip = tk.Toplevel(self.widget)
-        self.tooltip.wm_overrideredirect(True)
-        self.tooltip.wm_geometry(f"+{x}+{y}")
+# Load an image (replace 'path/to/your/image.png' with the actual path to your image file)
+image_path = 'LTO Image/restart.png'
+img = PhotoImage(file=image_path)
 
-        label = tk.Label(self.tooltip, text=self.text, background="#ffffe0", relief="solid", borderwidth=1)
-        label.pack(ipadx=1)
+# Create a restart button with an image and set the size
+restart_button = Button(root, text="Restart", image=img, command=restart_program, width=30, height=30)
+restart_button.place(x=5, y=5)
 
-    def hide_tooltip(self, event):
-        if self.tooltip:
-            self.tooltip.destroy()
-            self.tooltip = None
-
-def show_info():
-    messagebox.showinfo("Information", "This is some information.")
-
-# Create the main application window
-app = tk.Tk()
-app.title("Tkinter Info Button Example")
-
-# Create a label with the text "Info" and add a tooltip
-info_label = tk.Label(app, text="?", font=("Arial", 12), cursor="question_arrow")
-info_label.pack(pady=20)
-
-# Associate the label with the tooltip
-ToolTip(info_label, "Click for information")
-
-# Bind the label to show_info function on click
-info_label.bind("<Button-1>", lambda event: show_info())
+# Create a button to toggle the visibility of the restart button
+toggle_button = Button(root, text="Toggle Visibility", command=toggle_visibility)
+toggle_button.pack(pady=10)
 
 # Run the Tkinter event loop
-app.mainloop()
+root.mainloop()
