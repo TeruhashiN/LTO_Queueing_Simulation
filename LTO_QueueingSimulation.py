@@ -677,10 +677,6 @@ def simulation_result():
     FailedExaminees_Label = Label(simresult, text="Failed Examinees: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
     FailedExaminees_Label.place(x=400, y=220)
 
-    # Bind the window closing event to the on_closing function
-    root.protocol("WM_DELETE_WINDOW", on_closing)
-
-
     # This will make the ApplicantResult Run
     ApplicantResult()
 
