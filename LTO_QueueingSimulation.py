@@ -88,6 +88,19 @@ def PlacePACD():
 
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for i, time_avg in enumerate(individual_times, 1):
+            individual_seconds = time_avg
+            individual_minutes = individual_seconds // 60
+            individual_seconds = individual_seconds % 60
+
+            # print each individual timeframe
+            PACD_history_result = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg,
+                                                                                                     individual_minutes,
+                                                                                                     individual_seconds)
+            print(PACD_history_result)
+            history_results.append(PACD_history_result)
+
     except ZeroDivisionError:
         PACD_TimeConsume = PACD_total_time_hours / 2
 
@@ -96,6 +109,19 @@ def PlacePACD():
         minutes = int((PACD_TimeConsume - hours) * 60)
 
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+
+        # Print individual times
+        for i, time_avg in enumerate(individual_times, 1):
+            individual_seconds = time_avg
+            individual_minutes = individual_seconds // 60
+            individual_seconds = individual_seconds % 60
+
+            # print each individual timeframe
+            PACD_history_result = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg,
+                                                                                                     individual_minutes,
+                                                                                                     individual_seconds)
+            print(PACD_history_result)
+            history_results.append(PACD_history_result)
 
 def PlacePortal():
     global Portal_history_result
@@ -145,6 +171,20 @@ def PlacePortal():
         minutes = int((Portal_TimeConsume - hours) * 60)
 
         print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+        # Print individual times
+        for Portal_i, Portal_time_avg in enumerate(Portal_individual_times, 1):
+            Portal_individual_seconds = Portal_time_avg
+            Portal_individual_minutes = Portal_individual_seconds // 60
+            Portal_individual_seconds = Portal_individual_seconds % 60
+
+            # Print each individual TimeFrame
+
+            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i,
+                                                                                                         Portal_time_avg,
+                                                                                                         Portal_individual_minutes,
+                                                                                                         Portal_individual_seconds)
+            print(Portal_history_result)
+            Portal_history_results.append(Portal_history_result)
 
     except ZeroDivisionError:
         Portal_TimeConsume = (Portal_total_time_hours / 1)
@@ -154,6 +194,21 @@ def PlacePortal():
         minutes = int((Portal_TimeConsume - hours) * 60)
 
         print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+
+        # Print individual times
+        for Portal_i, Portal_time_avg in enumerate(Portal_individual_times, 1):
+            Portal_individual_seconds = Portal_time_avg
+            Portal_individual_minutes = Portal_individual_seconds // 60
+            Portal_individual_seconds = Portal_individual_seconds % 60
+
+            # Print each individual TimeFrame
+
+            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i,
+                                                                                                         Portal_time_avg,
+                                                                                                         Portal_individual_minutes,
+                                                                                                         Portal_individual_seconds)
+            print(Portal_history_result)
+            Portal_history_results.append(Portal_history_result)
 
 def PlaceCashier():
     Cashier_total_time_minutes = 0
@@ -196,6 +251,17 @@ def PlaceCashier():
 
         print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for Cashier_i, Cashier_time_avg in enumerate(Cashier_individual_times, 1):
+            Cashier_individual_seconds = Cashier_time_avg
+            Cashier_individual_minutes = Cashier_individual_seconds // 60
+            Cashier_individual_seconds = Cashier_individual_seconds % 60
+            Cashier_history_result = "Cashier Applicant {}: {} seconds ({} minutes and {} seconds)".format(Cashier_i,
+                                                                                                           Cashier_time_avg,
+                                                                                                           Cashier_individual_minutes,
+                                                                                                           Cashier_individual_seconds)
+            Cashier_history_results.append(Cashier_history_result)
+
     except ZeroDivisionError:
         Cashier_TimeConsume = (Cashier_total_time_hours / 1)
 
@@ -204,6 +270,17 @@ def PlaceCashier():
         minutes = int((Cashier_TimeConsume - hours) * 60)
 
         print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+
+        # Print individual times
+        for Cashier_i, Cashier_time_avg in enumerate(Cashier_individual_times, 1):
+            Cashier_individual_seconds = Cashier_time_avg
+            Cashier_individual_minutes = Cashier_individual_seconds // 60
+            Cashier_individual_seconds = Cashier_individual_seconds % 60
+            Cashier_history_result = "Cashier Applicant {}: {} seconds ({} minutes and {} seconds)".format(Cashier_i,
+                                                                                                           Cashier_time_avg,
+                                                                                                           Cashier_individual_minutes,
+                                                                                                           Cashier_individual_seconds)
+            Cashier_history_results.append(Cashier_history_result)
 
 def PlaceComputer():
     Computer_result = Computer_entry.get()
@@ -318,6 +395,17 @@ def PlaceBiometric():
 
         print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times
+        for Biometric_i, Biometric_time_avg in enumerate(Biometric_individual_times, 1):
+            Biometric_individual_seconds = Biometric_time_avg
+            Biometric_individual_minutes = Biometric_individual_seconds // 60
+            Biometric_individual_seconds = Biometric_individual_seconds % 60
+
+            # print each individual timeframe
+            Biometric_history_result = "Biometric Applicant {}: {} seconds ({} minutes and {} seconds)".format(
+                Biometric_i, Biometric_time_avg, Biometric_individual_minutes, Biometric_individual_seconds)
+            Biometric_history_results.append(Biometric_history_result)
+
     except ZeroDivisionError:
         Biometric_TimeConsume = (Biometric_total_time_hours / 1)
 
@@ -326,6 +414,17 @@ def PlaceBiometric():
         minutes = int((Biometric_TimeConsume - hours) * 60)
 
         print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
+
+        # Print individual times
+        for Biometric_i, Biometric_time_avg in enumerate(Biometric_individual_times, 1):
+            Biometric_individual_seconds = Biometric_time_avg
+            Biometric_individual_minutes = Biometric_individual_seconds // 60
+            Biometric_individual_seconds = Biometric_individual_seconds % 60
+
+            # print each individual timeframe
+            Biometric_history_result = "Biometric Applicant {}: {} seconds ({} minutes and {} seconds)".format(
+                Biometric_i, Biometric_time_avg, Biometric_individual_minutes, Biometric_individual_seconds)
+            Biometric_history_results.append(Biometric_history_result)
 
 def guide_butt():
     # Direct to INSTRUCTION GUI
