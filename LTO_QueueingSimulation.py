@@ -322,15 +322,23 @@ def PlaceComputer():
     total_blue_card_time = 0
     total_green_card_time = 0
 
+    # Initialize variables to store the total times for blue card and green card applicants
+    total_blue_card_time = 0
+    total_green_card_time = 0
+    blue_card_individual_times = []
+    green_card_individual_times = []
+
     # Generate random times for blue card applicants and calculate the total time
-    for _ in range(blue_card_count):
+    for i in range(blue_card_count):
         time_allocated = random.randint(min_time, max_time)
-        total_blue_card_time += time_allocated / 7   # to be fixed
+        total_blue_card_time += time_allocated / 7  # to be fixed
+        blue_card_individual_times.append(time_allocated)
 
     # Generate random times for green card applicants and calculate the total time
-    for _ in range(green_card_count):
+    for i in range(green_card_count):
         time_allocated = random.randint(min_time, max_time)
-        total_green_card_time += time_allocated / 7    # to be fixed
+        total_green_card_time += time_allocated / 7  # to be fixed
+        green_card_individual_times.append(time_allocated)
 
     # Convert the total times from seconds to minutes
     total_both_card_time_minutes = (total_blue_card_time + total_green_card_time) / 60
@@ -345,6 +353,22 @@ def PlaceComputer():
         minutes = int((ExaminationTimeConsume - hours) * 60)
 
         print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+
+        # Print individual times for blue card applicants
+        for i, time_allocated in enumerate(blue_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            Computer_history_result = "Renewal License Examination {}: {} seconds ({} minutes and {} seconds)".format(i, time_allocated, minutes,seconds)
+
+            Computer_history_results.append(Computer_history_result)
+
+        # Print individual times for green card applicants
+        for i, time_allocated in enumerate(green_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            Computer_history_result = "Non-Professional License Examination {}: {} seconds ({} minutes and {} seconds)".format(i, time_allocated, minutes,seconds)
+            Computer_history_results.append(Computer_history_result)
+
 
 
 
@@ -624,16 +648,16 @@ def Simulation_Mode():
                             "By checking the documents, they are the one who will give you the Color card based on your designated.")
 
     def Portal_show_info():
-        messagebox.showinfo("Information","Portal")
+        messagebox.showinfo("Information","There are currently 1 Portal in the LTO Daet.")
 
     def Cashier_show_info():
-        messagebox.showinfo("Information","Cashier")
+        messagebox.showinfo("Information","There are currently 1 Cashier in the LTO Daet.")
 
     def Computer_show_info():
-        messagebox.showinfo("Information","Computer")
+        messagebox.showinfo("Information","There are currently 7 Computers in the Examination Room")
 
     def Biometric_show_info():
-        messagebox.showinfo("Information","Biometric")
+        messagebox.showinfo("Information","There are 1 Biometric in LTO Daet.")
 
     def restart_program():
         result = messagebox.askyesno("Restart", "Do you really want to restart the program?")
@@ -911,6 +935,8 @@ def ApplicantResult():
     RenewLicense_Label.config(text=f"Renew License Applicants: {int(green_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     Miscellaneous_Label.config(text=f"Miscellaneous Applicants: {int(orange_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     total_applicants_label.config(text=f"Total Applicants: {applicants}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
+    AddedStationLabel.config(text=f"Added Station: {int(PACD_entry.get()) + int(Portal_entry.get()) + int(Cashier_entry.get()) + int(Computer_entry.get()) + int(Biometric_entry.get())}" \
+        , font=("Montserrat", 15, "italic"), bg='white', fg='#440d31')
 
 def on_scroll(*args):
     # Function to handle scrolling events
@@ -953,8 +979,7 @@ def showHistory():
     listbox = Listbox(HistoryResultFrame, yscrollcommand=scrollbar.set)
 
     # Concatenate the two lists
-    all_history_results = history_results + Portal_history_results + Cashier_history_results + Biometric_history_results
-
+    all_history_results = history_results + Portal_history_results + Computer_history_results + Cashier_history_results + Biometric_history_results
     # Add items to the listbox
     for result in all_history_results:
         listbox.insert("end", result)

@@ -172,7 +172,7 @@ def PlaceCashier():
             Cashier_individual_seconds = Cashier_time_avg
             Cashier_individual_minutes = Cashier_individual_seconds // 60
             Cashier_individual_seconds = Cashier_individual_seconds % 60
-            # print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(Cashier_i, Cashier_time_avg, Cashier_individual_minutes, Cashier_individual_seconds))
+            print("Applicant {}: {} seconds ({} minutes and {} seconds)".format(Cashier_i, Cashier_time_avg, Cashier_individual_minutes, Cashier_individual_seconds))
 
 
     except ValueError:
@@ -206,21 +206,24 @@ def PlaceComputer():
     # Initialize variables to store the total times for blue card and green card applicants
     total_blue_card_time = 0
     total_green_card_time = 0
+    blue_card_individual_times = []
+    green_card_individual_times = []
 
     # Generate random times for blue card applicants and calculate the total time
-    for _ in range(blue_card_count):
+    for i in range(blue_card_count):
         time_allocated = random.randint(min_time, max_time)
-        total_blue_card_time += time_allocated / 7   # to be fixed
+        total_blue_card_time += time_allocated / 7  # to be fixed
+        blue_card_individual_times.append(time_allocated)
 
     # Generate random times for green card applicants and calculate the total time
-    for _ in range(green_card_count):
+    for i in range(green_card_count):
         time_allocated = random.randint(min_time, max_time)
-        total_green_card_time += time_allocated / 7    # to be fixed
+        total_green_card_time += time_allocated / 7  # to be fixed
+        green_card_individual_times.append(time_allocated)
 
     # Convert the total times from seconds to minutes
     total_both_card_time_minutes = (total_blue_card_time + total_green_card_time) / 60
     total_both_card_time_hours = total_both_card_time_minutes / 60
-
 
     try:
         ExaminationTimeConsume = total_both_card_time_hours / (7 + float(Computer))
@@ -229,9 +232,19 @@ def PlaceComputer():
         hours = int(ExaminationTimeConsume)
         minutes = int((ExaminationTimeConsume - hours) * 60)
 
-        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Examination Time: {} hours and {} minutes".format(hours, minutes))
 
+        # Print individual times for blue card applicants
+        for i, time_allocated in enumerate(blue_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            print("Blue Card Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_allocated, minutes, seconds))
 
+        # Print individual times for green card applicants
+        for i, time_allocated in enumerate(green_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            print("Green Card Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_allocated, minutes, seconds))
 
     except ValueError:
         ExaminationTimeConsume = total_both_card_time_hours / 7
@@ -240,7 +253,7 @@ def PlaceComputer():
         hours = int(ExaminationTimeConsume)
         minutes = int((ExaminationTimeConsume - hours) * 60)
 
-        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Examination Time: {} hours and {} minutes".format(hours, minutes))
 
     except ZeroDivisionError:
         ExaminationTimeConsume = total_both_card_time_hours / 7
@@ -249,10 +262,7 @@ def PlaceComputer():
         hours = int(ExaminationTimeConsume)
         minutes = int((ExaminationTimeConsume - hours) * 60)
 
-        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
-
-
-# To be fixed Dapat sa random ppl first 7 ang makaka accomodate ng room
+        print("Total Examination Time: {} hours and {} minutes".format(hours, minutes))
 
 
 
