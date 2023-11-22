@@ -15,10 +15,10 @@ Computer_history_results = []
 Biometric_history_results = []
 
 
-# #Music Play
-# mixer.init()
-# mixer.music.load('MusicBackground/music_background.mp3')
-# mixer.music.play()
+#Music Play
+mixer.init()
+mixer.music.load('MusicBackground/music_background.mp3')
+mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -524,7 +524,7 @@ def MAINGUIMODE():
     button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
 
-    alphatest = Label(panel, text="Keima Test 1.3",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.5",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1250,y=710)
 
     # Bind the window closing event to the on_closing function
@@ -694,7 +694,7 @@ def Simulation_Mode():
     panel = Label(sim, image=img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
-    alphatest = Label(panel, text="Keima Test 1.3", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.5", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1215, y=710)
 
     # font
@@ -1023,7 +1023,7 @@ def showHistory():
 
 
 # simulation_result()
-# MAINGUIMODE()
-Simulation_Mode()
+MAINGUIMODE()
+# Simulation_Mode()
 
 

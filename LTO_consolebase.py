@@ -59,7 +59,7 @@ def PlacePACD():
         PACD_hours = int(PACD_TimeConsume)
         PACD_minutes = int((PACD_TimeConsume - PACD_hours) * 60)
 
-        print(PACD_hours, PACD_minutes)
+
         totalPACDTime = "Total PACD Time: {} hours and {} minutes".format(PACD_hours, PACD_minutes)
         print(totalPACDTime)
 
@@ -90,7 +90,6 @@ def PlacePACD():
 
         print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
 
-    return total_time_minutes, individual_times
 
 def PlacePortal():
     Portal_total_time_minutes = 0
@@ -112,7 +111,6 @@ def PlacePortal():
         Portal_hours = int(Portal_TimeConsume)
         Portal_minutes = int((Portal_TimeConsume - Portal_hours) * 60)
 
-        print(Portal_hours, Portal_minutes)
         totalPortalTime = "Total Portal Time: {} hours and {} minutes".format(Portal_hours, Portal_minutes)
         print(totalPortalTime)
 
