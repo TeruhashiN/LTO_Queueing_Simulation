@@ -34,6 +34,8 @@ Biometric_history_results = []
 # total = 145
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
 # The average LTO applicants per day is around 95 - 145
 applicants = random.randint(95, 145)
 
@@ -657,12 +659,21 @@ def Simulation_Mode():
         messagebox.showinfo("Information","There are 1 Biometric in LTO Daet.")
 
     def restart_program():
+        global applicants, yellow_card, blue_card, green_card, orange_card
         result = messagebox.askyesno("Restart", "Do you really want to restart the program?")
         if result:
+            applicants = random.randint(95, 145)
+            yellow_card = applicants * 0.34
+            blue_card = applicants * 0.28
+            green_card = applicants * 0.24
+            orange_card = applicants * 0.14
+
             sim.destroy()
             time.sleep(1)
             Simulation_Mode()
             print("Restarting the program")
+
+            # Right now, the only problem is that I can't reset the History
 
 
     def on_exit_click():
