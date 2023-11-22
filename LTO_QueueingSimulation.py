@@ -71,7 +71,7 @@ class ToolTip:
             self.tooltip = None
 
 def PlacePACD():
-    global PACD_history_result
+    global PACD_history_result, PACD_hours, PACD_minutes
     total_time_minutes = 0
     total_time_hours = 0
     individual_times = []
@@ -89,10 +89,10 @@ def PlacePACD():
         PACD_TimeConsume = PACD_total_time_hours / (2 + float(PACD_result))
 
         # Convert PACD_TimeConsume into hours and minutes
-        hours = int(PACD_TimeConsume)
-        minutes = int((PACD_TimeConsume - hours) * 60)
+        PACD_hours = int(PACD_TimeConsume)
+        PACD_minutes = int((PACD_TimeConsume - PACD_hours) * 60)
 
-        print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total PACD Time: {} hours and {} minutes".format(PACD_hours, PACD_minutes))
 
         # Print individual times
         for i, time_avg in enumerate(individual_times, 1):
@@ -102,17 +102,17 @@ def PlacePACD():
 
             #print each individual timeframe
             PACD_history_result = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg, individual_minutes, individual_seconds)
-            print(PACD_history_result)
+            # print(PACD_history_result)
             history_results.append(PACD_history_result)
 
     except ValueError:
         PACD_TimeConsume = PACD_total_time_hours / 2
 
         # Convert PACD_TimeConsume into hours and minutes
-        hours = int(PACD_TimeConsume)
-        minutes = int((PACD_TimeConsume - hours) * 60)
+        PACD_hours = int(PACD_TimeConsume)
+        PACD_minutes = int((PACD_TimeConsume - PACD_hours) * 60)
 
-        print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total PACD Time: {} hours and {} minutes".format(PACD_hours, PACD_minutes))
 
         # Print individual times
         for i, time_avg in enumerate(individual_times, 1):
@@ -124,17 +124,17 @@ def PlacePACD():
             PACD_history_result = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg,
                                                                                                      individual_minutes,
                                                                                                      individual_seconds)
-            print(PACD_history_result)
+            # print(PACD_history_result)
             history_results.append(PACD_history_result)
 
     except ZeroDivisionError:
         PACD_TimeConsume = PACD_total_time_hours / 2
 
         # Convert PACD_TimeConsume into hours and minutes
-        hours = int(PACD_TimeConsume)
-        minutes = int((PACD_TimeConsume - hours) * 60)
+        PACD_hours = int(PACD_TimeConsume)
+        PACD_minutes = int((PACD_TimeConsume - PACD_hours) * 60)
 
-        print("Total PACD Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total PACD Time: {} hours and {} minutes".format(PACD_hours, PACD_minutes))
 
         # Print individual times
         for i, time_avg in enumerate(individual_times, 1):
@@ -146,11 +146,11 @@ def PlacePACD():
             PACD_history_result = "PACD Applicant {}: {} seconds ({} minutes and {} seconds)".format(i, time_avg,
                                                                                                      individual_minutes,
                                                                                                      individual_seconds)
-            print(PACD_history_result)
+            # print(PACD_history_result)
             history_results.append(PACD_history_result)
 
 def PlacePortal():
-    global Portal_history_result
+    global Portal_history_result, Portal_hours, Portal_minutes
     Portal_total_time_minutes = 0
     Portal_total_time_hours = 0
     Portal_individual_times = []
@@ -168,10 +168,10 @@ def PlacePortal():
         Portal_TimeConsume = (Portal_total_time_hours / float(Portal_result))
 
         # Convert Portal_TimeConsume into hours and minutes
-        hours = int(Portal_TimeConsume)
-        minutes = int((Portal_TimeConsume - hours) * 60)
+        Portal_hours = int(Portal_TimeConsume)
+        Portal_minutes = int((Portal_TimeConsume - Portal_hours) * 60)
 
-        print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Portal Time: {} hours and {} minutes".format(Portal_hours, Portal_minutes))
 
         # Print individual times
         for Portal_i, Portal_time_avg in enumerate(Portal_individual_times, 1):
@@ -184,7 +184,7 @@ def PlacePortal():
 
 
             Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i, Portal_time_avg, Portal_individual_minutes,  Portal_individual_seconds)
-            print(Portal_history_result)
+            # print(Portal_history_result)
             Portal_history_results.append(Portal_history_result)
 
 
@@ -193,10 +193,10 @@ def PlacePortal():
         Portal_TimeConsume = (Portal_total_time_hours / 1)
 
         # Convert Portal_TimeConsume into hours and minutes
-        hours = int(Portal_TimeConsume)
-        minutes = int((Portal_TimeConsume - hours) * 60)
+        Portal_hours = int(Portal_TimeConsume)
+        Portal_minutes = int((Portal_TimeConsume - Portal_hours) * 60)
 
-        print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Portal Time: {} hours and {} minutes".format(Portal_hours, Portal_minutes))
         # Print individual times
         for Portal_i, Portal_time_avg in enumerate(Portal_individual_times, 1):
             Portal_individual_seconds = Portal_time_avg
@@ -205,21 +205,18 @@ def PlacePortal():
 
             # Print each individual TimeFrame
 
-            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i,
-                                                                                                         Portal_time_avg,
-                                                                                                         Portal_individual_minutes,
-                                                                                                         Portal_individual_seconds)
-            print(Portal_history_result)
+            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i,Portal_time_avg, Portal_individual_minutes,Portal_individual_seconds)
+            # print(Portal_history_result)
             Portal_history_results.append(Portal_history_result)
 
     except ZeroDivisionError:
         Portal_TimeConsume = (Portal_total_time_hours / 1)
 
         # Convert Portal_TimeConsume into hours and minutes
-        hours = int(Portal_TimeConsume)
-        minutes = int((Portal_TimeConsume - hours) * 60)
+        Portal_hours = int(Portal_TimeConsume)
+        Portal_minutes = int((Portal_TimeConsume - Portal_hours) * 60)
 
-        print("Total Portal Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Portal Time: {} hours and {} minutes".format(Portal_hours, Portal_minutes))
 
         # Print individual times
         for Portal_i, Portal_time_avg in enumerate(Portal_individual_times, 1):
@@ -229,14 +226,12 @@ def PlacePortal():
 
             # Print each individual TimeFrame
 
-            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i,
-                                                                                                         Portal_time_avg,
-                                                                                                         Portal_individual_minutes,
-                                                                                                         Portal_individual_seconds)
-            print(Portal_history_result)
+            Portal_history_result = "Portal Applicant {}: {} seconds ({} minutes and {} seconds)".format(Portal_i,Portal_time_avg,Portal_individual_minutes,Portal_individual_seconds)
+            # print(Portal_history_result)
             Portal_history_results.append(Portal_history_result)
 
 def PlaceCashier():
+    global Cashier_hours, Cashier_minutes
     Cashier_total_time_minutes = 0
     Cashier_total_time_hours = 0
     Cashier_individual_times = []
@@ -255,10 +250,10 @@ def PlaceCashier():
         Cashier_TimeConsume = (Cashier_total_time_hours/ float(Cashier_result))
 
         # Convert Cashier_TimeConsume into hours and minutes
-        hours = int(Cashier_TimeConsume)
-        minutes = int((Cashier_TimeConsume - hours) * 60)
+        Cashier_hours = int(Cashier_TimeConsume)
+        Cashier_minutes = int((Cashier_TimeConsume - Cashier_hours) * 60)
 
-        print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Cashier Time: {} hours and {} minutes".format(Cashier_hours, Cashier_minutes))
 
         # Print individual times
         for Cashier_i, Cashier_time_avg in enumerate(Cashier_individual_times, 1):
@@ -272,10 +267,10 @@ def PlaceCashier():
         Cashier_TimeConsume = (Cashier_total_time_hours / 1)
 
         # Convert Cashier_TimeConsume into hours and minutes
-        hours = int(Cashier_TimeConsume)
-        minutes = int((Cashier_TimeConsume - hours) * 60)
+        Cashier_hours = int(Cashier_TimeConsume)
+        Cashier_minutes = int((Cashier_TimeConsume - Cashier_hours) * 60)
 
-        print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Cashier Time: {} hours and {} minutes".format(Cashier_hours, Cashier_minutes))
 
         # Print individual times
         for Cashier_i, Cashier_time_avg in enumerate(Cashier_individual_times, 1):
@@ -292,10 +287,10 @@ def PlaceCashier():
         Cashier_TimeConsume = (Cashier_total_time_hours / 1)
 
         # Convert Cashier_TimeConsume into hours and minutes
-        hours = int(Cashier_TimeConsume)
-        minutes = int((Cashier_TimeConsume - hours) * 60)
+        Cashier_hours = int(Cashier_TimeConsume)
+        Cashier_minutes = int((Cashier_TimeConsume - Cashier_hours) * 60)
 
-        print("Total Cashier Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Cashier Time: {} hours and {} minutes".format(Cashier_hours, Cashier_minutes))
 
         # Print individual times
         for Cashier_i, Cashier_time_avg in enumerate(Cashier_individual_times, 1):
@@ -309,6 +304,7 @@ def PlaceCashier():
             Cashier_history_results.append(Cashier_history_result)
 
 def PlaceComputer():
+    global Exam_hours, Exam_minutes
     Computer_result = Computer_entry.get()
     # Define the range for time allocation (10 minutes to 1 hour in seconds)
     min_time = 10 * 60
@@ -349,10 +345,10 @@ def PlaceComputer():
         ExaminationTimeConsume = total_both_card_time_hours / (7 + float(Computer_result))
 
         # Convert Examination_TimeConsume into hours and minutes
-        hours = int(ExaminationTimeConsume)
-        minutes = int((ExaminationTimeConsume - hours) * 60)
+        Exam_hours = int(ExaminationTimeConsume)
+        Exam_minutes = int((ExaminationTimeConsume - Exam_hours) * 60)
 
-        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Examation Time: {} hours and {} minutes".format(Exam_hours, Exam_minutes))
 
         # Print individual times for blue card applicants
         for i, time_allocated in enumerate(blue_card_individual_times, 1):
@@ -376,25 +372,26 @@ def PlaceComputer():
         ExaminationTimeConsume = total_both_card_time_hours / 7
 
         # Convert Examination_TimeConsume into hours and minutes
-        hours = int(ExaminationTimeConsume)
-        minutes = int((ExaminationTimeConsume - hours) * 60)
+        Exam_hours = int(ExaminationTimeConsume)
+        Exam_minutes = int((ExaminationTimeConsume - Exam_hours) * 60)
 
-        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Examation Time: {} hours and {} minutes".format(Exam_hours, Exam_minutes))
 
     except ZeroDivisionError:
         ExaminationTimeConsume = total_both_card_time_hours / 7
 
         # Convert Examination_TimeConsume into hours and minutes
-        hours = int(ExaminationTimeConsume)
-        minutes = int((ExaminationTimeConsume - hours) * 60)
+        Exam_hours = int(ExaminationTimeConsume)
+        Exam_minutes = int((ExaminationTimeConsume - Exam_hours) * 60)
 
-        print("Total Examation Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Examation Time: {} hours and {} minutes".format(Exam_hours, Exam_minutes))
 
 
 # To be fixed Dapat sa random ppl first 7 ang makaka accomodate ng room
 
 
 def PlaceBiometric():
+    global Biometric_hours, Biometric_minutes
     # Consume at least 40 seconds per person; however, there's a queuing
     # Formula Total Time in MINUTES = (Number of People) x (Time per Person in seconds) / 60
     # Total Time in HOURS = MINUTES / 60
@@ -419,10 +416,10 @@ def PlaceBiometric():
 
 
         # Convert PACD_TimeConsume into hours and minutes
-        hours = int(Biometric_TimeConsume)
-        minutes = int((Biometric_TimeConsume - hours) * 60)
+        Biometric_hours = int(Biometric_TimeConsume)
+        Biometric_minutes = int((Biometric_TimeConsume - Biometric_hours) * 60)
 
-        print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Biometric Time: {} hours and {} minutes".format(Biometric_hours, Biometric_minutes))
 
         # Print individual times
         for Biometric_i, Biometric_time_avg in enumerate(Biometric_individual_times, 1):
@@ -439,11 +436,11 @@ def PlaceBiometric():
     except ValueError:
         Biometric_TimeConsume = (Biometric_total_time_hours / 1)
 
-        # Convert PACD_TimeConsume into hours and minutes
-        hours = int(Biometric_TimeConsume)
-        minutes = int((Biometric_TimeConsume - hours) * 60)
+        # Convert Biometric into hours and minutes
+        Biometric_hours = int(Biometric_TimeConsume)
+        Biometric_minutes = int((Biometric_TimeConsume - Biometric_hours) * 60)
 
-        print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Biometric Time: {} hours and {} minutes".format(Biometric_hours, Biometric_minutes))
 
         # Print individual times
         for Biometric_i, Biometric_time_avg in enumerate(Biometric_individual_times, 1):
@@ -460,10 +457,10 @@ def PlaceBiometric():
         Biometric_TimeConsume = (Biometric_total_time_hours / 1)
 
         # Convert PACD_TimeConsume into hours and minutes
-        hours = int(Biometric_TimeConsume)
-        minutes = int((Biometric_TimeConsume - hours) * 60)
+        Biometric_hours = int(Biometric_TimeConsume)
+        Biometric_minutes = int((Biometric_TimeConsume - Biometric_hours) * 60)
 
-        print("Total Biometric Time: {} hours and {} minutes".format(hours, minutes))
+        print("Total Biometric Time: {} hours and {} minutes".format(Biometric_hours, Biometric_minutes))
 
         # Print individual times
         for Biometric_i, Biometric_time_avg in enumerate(Biometric_individual_times, 1):
@@ -525,7 +522,7 @@ def MAINGUIMODE():
     button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
 
-    alphatest = Label(panel, text="Keima Test 1.1",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.3",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1250,y=710)
 
     # Bind the window closing event to the on_closing function
@@ -686,7 +683,7 @@ def Simulation_Mode():
     panel = Label(sim, image=img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
-    alphatest = Label(panel, text="Keima Test 1.1", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.3", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1215, y=710)
 
     # font
@@ -840,7 +837,7 @@ def Simulation_Mode():
 def simulation_result():
     global total_applicants_label, student_permit_label, NonPro_Label,RenewLicense_Label, \
         Miscellaneous_Label, AddedStationLabel, ProblemEncounter_Label, RejectedApplicants_Label, \
-    FailedExaminees_Label, avgStudent_Permit_Label, avgNonPro_Label, avgRenewal_Label, avgMisc_label
+    FailedExaminees_Label, avgStudent_Permit_Label, avgNonPro_Label, avgRenewal_Label, avgMisc_label, LTO_worktime
 
 
     simresult = Tk()
@@ -891,6 +888,9 @@ def simulation_result():
     total_applicants_label = Label(simresult, text="Total Applicants: ", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
     total_applicants_label.place(x=30, y=370)
 
+    LTO_worktime = Label(simresult, text="LTO Working total time consume: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    LTO_worktime.place(x=30, y=490)
+
     # Next Row
     AddedStationLabel = Label(simresult, text="Added Station: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
     AddedStationLabel.place(x=400, y=120)
@@ -928,15 +928,34 @@ def simulation_result():
 
 
 def ApplicantResult():
-    # Gonna fix it later
+    # This upper one is for the total working hour time
+    global overall_hours, overall_minutes, total_minutes_result, combined_hours, total_minutes_equivalent
+    overall_hours = PACD_hours + Portal_hours + Cashier_hours + Exam_hours + Biometric_hours  # Combination of all Hours Total
+    overall_minutes = (PACD_minutes + Portal_minutes + Cashier_minutes + Exam_minutes + Biometric_minutes)  # combination of all Minutes total
+    total_minutes_result = overall_minutes / 60  # result in getting an HOUR by using int
+    combined_hours = overall_hours + int(total_minutes_result)  # Combination of all HOURS
+    total_minutes_equivalent = abs((int(total_minutes_result) * 60) - overall_minutes)  # getting the right amount of minutes
+    print("Overall Hours: ", combined_hours)
+    print("Over all Minutes: ", overall_minutes)  # overall minutes
+    print(total_minutes_equivalent)
+    workinghour_result = "{} hours and {} minutes".format(combined_hours, total_minutes_equivalent)
+    print(workinghour_result)
+    #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     student_permit_label.config(text=f"Student Permit Applicants: {int(yellow_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     NonPro_Label.config(text=f"Non-Pro License Applicants: {int(blue_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     RenewLicense_Label.config(text=f"Renew License Applicants: {int(green_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     Miscellaneous_Label.config(text=f"Miscellaneous Applicants: {int(orange_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     total_applicants_label.config(text=f"Total Applicants: {applicants}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
-    AddedStationLabel.config(text=f"Added Station: {int(PACD_entry.get()) + int(Portal_entry.get()) + int(Cashier_entry.get()) + int(Computer_entry.get()) + int(Biometric_entry.get())}" \
-        , font=("Montserrat", 15, "italic"), bg='white', fg='#440d31')
+
+    try:
+        AddedStationLabel.config(text=f"Added Station: {int(PACD_entry.get()) + int(Portal_entry.get()) + int(Cashier_entry.get()) + int(Computer_entry.get()) + int(Biometric_entry.get())}" \
+            , font=("Montserrat", 15, "italic"), bg='white', fg='#440d31')
+    except ValueError:
+        AddedStationLabel.config(text=f"Added Station: None", font=("Montserrat", 15, "italic"), bg='white', fg='#440d31')
+
+    LTO_worktime.config(text=f"LTO total time consumed: {workinghour_result}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+
 
 def on_scroll(*args):
     # Function to handle scrolling events
@@ -995,6 +1014,5 @@ def showHistory():
 # simulation_result()
 # MAINGUIMODE()
 Simulation_Mode()
-
 
 
