@@ -15,10 +15,10 @@ Computer_history_results = []
 Biometric_history_results = []
 
 
-#Music Play
-mixer.init()
-mixer.music.load('MusicBackground/music_background.mp3')
-mixer.music.play()
+# #Music Play
+# mixer.init()
+# mixer.music.load('MusicBackground/music_background.mp3')
+# mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -44,6 +44,8 @@ yellow_card = applicants * 0.34
 blue_card = applicants * 0.28
 green_card = applicants * 0.24
 orange_card = applicants * 0.14
+
+print(applicants)
 
 
 # Information Widget
@@ -826,6 +828,10 @@ def Simulation_Mode():
     sec_frame = LabelFrame(sim)
     sec_frame.place(x=480, y=30, width=sec_frameWidth, height=sec_frameHeight)
 
+    animation_img = ImageTk.PhotoImage(Image.open("LTO Image/LTOBACK.png"))  # LTO Background
+    panel = Label(sec_frame, image=animation_img)
+    panel.pack(side="bottom", fill="both", expand="yes")
+
     # Title for results
     title_text2 = Label(first2_frame, text="Click simulate to generate results", font=mont_bold, bg="#e9e9e9")
     title_text2.grid(row=0, column=0, padx=5, pady=20)
@@ -917,19 +923,19 @@ def simulation_result():
 
     #Third Row
     IndividualAverage_Label = Label(simresult, text="Individual Average Time ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    IndividualAverage_Label.place(x=730, y=70)
+    IndividualAverage_Label.place(x=680, y=70)
 
     avgStudent_Permit_Label = Label(simresult, text="Student permit: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgStudent_Permit_Label.place(x=750, y=120)
+    avgStudent_Permit_Label.place(x=700, y=120)
 
     avgNonPro_Label = Label(simresult, text="Non-Pro License: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgNonPro_Label.place(x=750, y=170)
+    avgNonPro_Label.place(x=700, y=170)
 
     avgRenewal_Label = Label(simresult, text="Renewal License: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgRenewal_Label.place(x=750, y=220)
+    avgRenewal_Label.place(x=700, y=220)
 
     avgMisc_label = Label(simresult, text="Miscellaneous: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgMisc_label.place(x=750, y=270)
+    avgMisc_label.place(x=700, y=270)
 
     # This will make the ApplicantResult Run
     ApplicantResult()
@@ -941,6 +947,7 @@ def simulation_result():
 def ApplicantResult():
     # This upper one is for the total working hour time
     global overall_hours, overall_minutes, total_minutes_result, combined_hours, total_minutes_equivalent
+
     overall_hours = PACD_hours + Portal_hours + Cashier_hours + Exam_hours + Biometric_hours  # Combination of all Hours Total
     overall_minutes = (PACD_minutes + Portal_minutes + Cashier_minutes + Exam_minutes + Biometric_minutes)  # combination of all Minutes total
     total_minutes_result = overall_minutes / 60  # result in getting an HOUR by using int
@@ -951,6 +958,11 @@ def ApplicantResult():
     print(total_minutes_equivalent)
     workinghour_result = "{} hours and {} minutes".format(combined_hours, total_minutes_equivalent)
     print(workinghour_result)
+
+
+
+
+
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     student_permit_label.config(text=f"Student Permit Applicants: {int(yellow_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
@@ -1022,8 +1034,7 @@ def showHistory():
     scrollbar.config(command=listbox.yview)
 
 
-# simulation_result()
-MAINGUIMODE()
-# Simulation_Mode()
+# MAINGUIMODE()
+Simulation_Mode()
 
 
