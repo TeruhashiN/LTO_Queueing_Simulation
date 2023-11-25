@@ -15,10 +15,10 @@ Computer_history_results = []
 Biometric_history_results = []
 
 
-# #Music Play
-# mixer.init()
-# mixer.music.load('MusicBackground/music_background.mp3')
-# mixer.music.play()
+#Music Play
+mixer.init()
+mixer.music.load('MusicBackground/music_background.mp3')
+mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -328,11 +328,13 @@ def PlaceComputer():
     blue_card_individual_times = []
     green_card_individual_times = []
 
+
     # Generate random times for blue card applicants and calculate the total time
     for i in range(blue_card_count):
         time_allocated = random.randint(min_time, max_time)
         total_blue_card_time += time_allocated / 7  # to be fixed
         blue_card_individual_times.append(time_allocated)
+
 
     # Generate random times for green card applicants and calculate the total time
     for i in range(green_card_count):
@@ -381,6 +383,25 @@ def PlaceComputer():
 
         print("Total Examation Time: {} hours and {} minutes".format(Exam_hours, Exam_minutes))
 
+        # Print individual times for blue card applicants
+        for i, time_allocated in enumerate(blue_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            Computer_history_result = "Renewal License Examination {}: {} seconds ({} minutes and {} seconds)".format(i,
+                                                                                                                      time_allocated,
+                                                                                                                      minutes,
+                                                                                                                      seconds)
+
+            Computer_history_results.append(Computer_history_result)
+
+        # Print individual times for green card applicants
+        for i, time_allocated in enumerate(green_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            Computer_history_result = "Non-Professional License Examination {}: {} seconds ({} minutes and {} seconds)".format(
+                i, time_allocated, minutes, seconds)
+            Computer_history_results.append(Computer_history_result)
+
     except ZeroDivisionError:
         ExaminationTimeConsume = total_both_card_time_hours / 7
 
@@ -389,6 +410,25 @@ def PlaceComputer():
         Exam_minutes = int((ExaminationTimeConsume - Exam_hours) * 60)
 
         print("Total Examation Time: {} hours and {} minutes".format(Exam_hours, Exam_minutes))
+
+        # Print individual times for blue card applicants
+        for i, time_allocated in enumerate(blue_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            Computer_history_result = "Renewal License Examination {}: {} seconds ({} minutes and {} seconds)".format(i,
+                                                                                                                      time_allocated,
+                                                                                                                      minutes,
+                                                                                                                      seconds)
+
+            Computer_history_results.append(Computer_history_result)
+
+        # Print individual times for green card applicants
+        for i, time_allocated in enumerate(green_card_individual_times, 1):
+            minutes = int(time_allocated / 60)
+            seconds = int(time_allocated % 60)
+            Computer_history_result = "Non-Professional License Examination {}: {} seconds ({} minutes and {} seconds)".format(
+                i, time_allocated, minutes, seconds)
+            Computer_history_results.append(Computer_history_result)
 
 
 # To be fixed Dapat sa random ppl first 7 ang makaka accomodate ng room
@@ -859,17 +899,17 @@ def simulation_result():
 
     simresult = Tk()
     simresult.title("Simulation Results")
-    simresult.geometry("1000x800")
+    simresult.geometry("1200x800")
     simresult.iconbitmap('LTO Image/LTO Logo.ico')
     simresult.resizable(False, False)
-    center_window(simresult, 1000, 600)
+    center_window(simresult, 1200, 600)
 
     def on_closing():
         simresult.destroy()
         sys.exit()
 
     # Title Frame
-    TFrame_width = 1000
+    TFrame_width = 1200
     TFrame_height = 50
     TFrame = LabelFrame(simresult, bd=5)  # Set bd for sizing
     TFrame.place(x=0, y=0, width=TFrame_width, height=TFrame_height)
@@ -877,7 +917,7 @@ def simulation_result():
     TFrame.rowconfigure(20, weight=1)
 
     #Result Frame
-    ResultFrame_width = 1000
+    ResultFrame_width = 1200
     ResultFrame_height = 750
     ResultFrame = LabelFrame(simresult, bd=5, bg='#FFFFFF')
     ResultFrame.place(x=0, y=50, width=ResultFrame_width, height=ResultFrame_height)
@@ -923,19 +963,19 @@ def simulation_result():
 
     #Third Row
     IndividualAverage_Label = Label(simresult, text="Individual Average Time ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    IndividualAverage_Label.place(x=680, y=70)
+    IndividualAverage_Label.place(x=750, y=70)
 
     avgStudent_Permit_Label = Label(simresult, text="Student permit: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgStudent_Permit_Label.place(x=700, y=120)
+    avgStudent_Permit_Label.place(x=770, y=120)
 
     avgNonPro_Label = Label(simresult, text="Non-Pro License: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgNonPro_Label.place(x=700, y=170)
+    avgNonPro_Label.place(x=770, y=170)
 
     avgRenewal_Label = Label(simresult, text="Renewal License: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgRenewal_Label.place(x=700, y=220)
+    avgRenewal_Label.place(x=770, y=220)
 
     avgMisc_label = Label(simresult, text="Miscellaneous: ",  font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
-    avgMisc_label.place(x=700, y=270)
+    avgMisc_label.place(x=770, y=270)
 
     # This will make the ApplicantResult Run
     ApplicantResult()
@@ -960,7 +1000,76 @@ def ApplicantResult():
     print(workinghour_result)
 
 
+    # Student Permit Formula # yellow card for student
+    stud_overall_hours = PACD_hours + Portal_hours + Cashier_hours + Biometric_hours
+    stud_overall_minutes = PACD_minutes + Portal_minutes + Cashier_minutes + Biometric_minutes
+    stud_total_minutes_result = stud_overall_minutes / 60 # it will be getting the minutes
+    combined_stud_hours = stud_overall_hours + int(stud_total_minutes_result) #combination of all hours
+    stud_computation_hours = combined_stud_hours * 60
 
+    total_stud_minutes_equivalent = abs((int(stud_total_minutes_result) * 60) - stud_overall_minutes) # getting the right amount of minutes
+
+    sum_min_and_hour = (stud_computation_hours + total_stud_minutes_equivalent)  # combining minute and hour into a number form
+    getting_initial_stud = sum_min_and_hour / yellow_card  # dividing it into a total student permit applicants
+
+    stud_min_int = int(getting_initial_stud)  # getting the integer minutes
+    stud_sec_int = (getting_initial_stud - stud_min_int) * 60  # multiplying by 60 to get the seconds
+
+
+    print("This is the average of student process: ", sum_min_and_hour / yellow_card)
+
+    stud_avg_result = "{} minutes & {} seconds".format(stud_min_int, int(stud_sec_int))
+    print(stud_avg_result)
+
+    #Non Pro Permit Formula # green card for student
+    examination_avg_time = random.randint(10, 60)  # 10mins to 1 hour
+    nonpro_overall_hours = PACD_hours + Portal_hours + Cashier_hours + Exam_hours + Biometric_hours
+    nonpro_overall_minutes = PACD_minutes + Portal_minutes + Cashier_minutes + Exam_minutes + Biometric_minutes
+
+
+
+    nonpro_total_minutes_result = nonpro_overall_minutes / 60  # it will be getting the minutes
+    combined_nonpro_hours = nonpro_overall_hours + int(nonpro_total_minutes_result)  # combination of all hours
+    nonpro_computation_hours = combined_nonpro_hours * 60
+
+    total_nonpro_minutes_equivalent = abs((int(nonpro_total_minutes_result) * 60) - nonpro_overall_minutes)  # getting the right amount of minutes
+
+    nonpro_sum_min_and_hour = (nonpro_computation_hours + total_nonpro_minutes_equivalent)  # combining minute and hour into a number form
+    getting_initial_nonpro = nonpro_sum_min_and_hour / green_card  # dividing it into a total non pro applicants
+
+
+    nonpro_min_int = int(getting_initial_nonpro)  # getting the integer minutes
+    nonpro_sec_int = (getting_initial_nonpro - nonpro_min_int) * 60  # multiplying by 60 to get the seconds
+
+
+
+    print("This is the average of Non professional process: ", nonpro_sum_min_and_hour / green_card)
+
+    nonpro_avg_result = "{} hours {} minutes & {} seconds".format(1, int(nonpro_min_int),int(nonpro_sec_int))
+    print(nonpro_avg_result)
+
+
+    # Miscellaneous Formula # Orange card for misc
+    misc_overall_hours = PACD_hours + Portal_hours + Cashier_hours + Biometric_hours
+    misc_overall_minutes = PACD_minutes + Portal_minutes + Cashier_minutes + Biometric_minutes
+    misc_total_minutes_result = misc_overall_minutes / 60  # it will be getting the minutes
+    combined_misc_hours = misc_overall_hours + int(misc_total_minutes_result)  # combination of all hours
+    misc_computation_hours = combined_misc_hours * 60
+
+    total_misc_minutes_equivalent = abs(
+        (int(misc_total_minutes_result) * 60) - misc_overall_minutes)  # getting the right amount of minutes
+
+    misc_sum_min_and_hour = (
+                misc_computation_hours + total_misc_minutes_equivalent)  # combining minute and hour into a number form
+    getting_initial_misc = misc_sum_min_and_hour / orange_card  # dividing it into a total student permit applicants
+
+    misc_min_int = int(getting_initial_misc)  # getting the integer minutes
+    misc_sec_int = (getting_initial_misc - misc_min_int) * 60  # multiplying by 60 to get the seconds
+
+    print("This is the average of misc process: ", misc_sum_min_and_hour / orange_card)
+
+    misc_avg_result = "{} minutes & {} seconds".format(misc_min_int, int(misc_sec_int))
+    print(misc_avg_result)
 
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -978,6 +1087,11 @@ def ApplicantResult():
         AddedStationLabel.config(text=f"Added Station: None", font=("Montserrat", 15, "italic"), bg='white', fg='#440d31')
 
     LTO_worktime.config(text=f"LTO total time consumed: {workinghour_result}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+
+    avgStudent_Permit_Label.config(text=f"Student permit: {stud_avg_result}",  font=("Montserrat", 10, "bold"), bg='white', fg="#440d31")
+    avgNonPro_Label.config(text=f"Non-Pro License: {nonpro_avg_result}", font=("Montserrat", 10, "bold"), bg='white',fg="#440d31")
+    avgRenewal_Label.config(text=f"Renewal License: {nonpro_avg_result}", font=("Montserrat", 10, "bold"), bg='white',fg="#440d31")
+    avgMisc_label.config(text=f"Miscellaneous: {misc_avg_result}",  font=("Montserrat", 10, "bold"), bg='white', fg="#440d31")
 
 
 def on_scroll(*args):
