@@ -15,6 +15,7 @@ Computer_history_results = []
 Biometric_history_results = []
 
 
+
 #Music Play
 mixer.init()
 mixer.music.load('MusicBackground/music_background.mp3')
@@ -46,6 +47,11 @@ green_card = applicants * 0.24
 orange_card = applicants * 0.14
 
 print(applicants)
+
+
+# This will show the error problem and effects
+today_problem = random.randint(1,100)
+
 
 
 # Information Widget
@@ -566,7 +572,7 @@ def MAINGUIMODE():
     button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
 
-    alphatest = Label(panel, text="Keima Test 1.5",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.7",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1250,y=710)
 
     # Bind the window closing event to the on_closing function
@@ -701,7 +707,7 @@ def Simulation_Mode():
         messagebox.showinfo("Information","There are 1 Biometric in LTO Daet.")
 
     def restart_program():
-        global applicants, yellow_card, blue_card, green_card, orange_card
+        global applicants, yellow_card, blue_card, green_card, orange_card, today_problem
         result = messagebox.askyesno("Restart", "Do you really want to restart the program?")
         if result:
             applicants = random.randint(95, 145)
@@ -709,6 +715,7 @@ def Simulation_Mode():
             blue_card = applicants * 0.28
             green_card = applicants * 0.24
             orange_card = applicants * 0.14
+            today_problem = random.randint(1,100)
 
             sim.destroy()
             time.sleep(1)
@@ -736,7 +743,7 @@ def Simulation_Mode():
     panel = Label(sim, image=img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
-    alphatest = Label(panel, text="Keima Test 1.5", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.7", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1215, y=710)
 
     # font
@@ -948,18 +955,16 @@ def simulation_result():
     LTO_worktime = Label(simresult, text="LTO Working total time consume: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
     LTO_worktime.place(x=30, y=490)
 
+    ProblemEncounter_Label = Label(simresult, text="Problem Encounter: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
+    ProblemEncounter_Label.place(x=700, y=490)
+
     # Next Row
     AddedStationLabel = Label(simresult, text="Added Station: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
     AddedStationLabel.place(x=400, y=120)
 
-    ProblemEncounter_Label = Label(simresult, text="Problem Encounter: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    ProblemEncounter_Label.place(x=400, y=170)
+    FailedExaminees_Label = Label(simresult, text="Failed Examinees: ", font=("Montserrat", 15, "italic"), bg='white',fg="#440d31")
+    FailedExaminees_Label.place(x=400, y=170)
 
-    RejectedApplicants_Label = Label(simresult, text="Rejected Applicants: ", font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    RejectedApplicants_Label.place(x=400, y=220)
-
-    FailedExaminees_Label = Label(simresult, text="Failed Examinees: ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
-    FailedExaminees_Label.place(x=400, y=270)
 
     #Third Row
     IndividualAverage_Label = Label(simresult, text="Individual Average Time ",  font=("Montserrat", 15, "italic"), bg='white', fg="#440d31")
@@ -1071,6 +1076,11 @@ def ApplicantResult():
     misc_avg_result = "{} minutes & {} seconds".format(misc_min_int, int(misc_sec_int))
     print(misc_avg_result)
 
+    failedExaminers = ((blue_card + green_card) * 0.3)
+    print("Failed Examiners",int(failedExaminers))
+
+
+
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1092,6 +1102,22 @@ def ApplicantResult():
     avgNonPro_Label.config(text=f"Non-Pro License: {nonpro_avg_result}", font=("Montserrat", 10, "bold"), bg='white',fg="#440d31")
     avgRenewal_Label.config(text=f"Renewal License: {nonpro_avg_result}", font=("Montserrat", 10, "bold"), bg='white',fg="#440d31")
     avgMisc_label.config(text=f"Miscellaneous: {misc_avg_result}",  font=("Montserrat", 10, "bold"), bg='white', fg="#440d31")
+
+    FailedExaminees_Label.config(text=f"Failed Examiners: {int(failedExaminers)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+
+
+    if today_problem == 3:
+        problem_result = "Internet Connection Problem"
+        ProblemEncounter_Label.config(text=f"Problem Encounter: {problem_result}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
+        # THis will add 1 hour to time into the system
+
+        # You can also update a label here if needed
+        # For example: status_label.config(text="Internet Connection Problem. Service Delayed.")
+    else:
+        problem_result = "None"
+        ProblemEncounter_Label.config(text=f"Problem Encounter: {problem_result}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
+        # You can also update a label here if needed
+        # For example: status_label.config(text="No issues today.")
 
 
 def on_scroll(*args):
@@ -1117,7 +1143,7 @@ def showHistory():
 
     # Result Frame
     HistoryResultFrame_width = 1000
-    HistoryResultFrame_height = 750
+    HistoryResultFrame_height = 550
     HistoryResultFrame = LabelFrame(historyResult, bd=5, bg='#FFFFFF')
     HistoryResultFrame.place(x=0, y=50, width=HistoryResultFrame_width, height=HistoryResultFrame_height)
     FFrame.columnconfigure(0, minsize=500, weight=1)
@@ -1129,7 +1155,7 @@ def showHistory():
     historytitle_.grid(row=0, column=0, padx=0, pady=0, sticky='nsew')
 
     # Create a vertical scrollbar
-    scrollbar = Scrollbar(HistoryResultFrame, orient="vertical", command=on_scroll)
+    scrollbar = Scrollbar(HistoryResultFrame, orient="vertical", command=on_scroll, width=20, relief="flat")
 
     # Create a widget (e.g., Listbox or Text) that you want to attach the scrollbar to
     listbox = Listbox(HistoryResultFrame, yscrollcommand=scrollbar.set)
