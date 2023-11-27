@@ -1174,7 +1174,7 @@ def showHistory():
     scrollbar.config(command=listbox.yview)
 
 
-# MAINGUIMODE()
-Simulation_Mode()
+MAINGUIMODE()
+# Simulation_Mode()
 
 
