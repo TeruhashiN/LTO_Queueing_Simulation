@@ -41,10 +41,10 @@ mixer.music.play()
 applicants = random.randint(95, 145)
 
 # Total Average of Applicant in seperate Licensing queueing
-yellow_card = applicants * 0.34
-blue_card = applicants * 0.28
-green_card = applicants * 0.24
-orange_card = applicants * 0.14
+yellow_card = int(applicants) * 0.34
+blue_card = int(applicants) * 0.28
+green_card = int(applicants) * 0.24
+orange_card = int(applicants) * 0.14
 
 print(applicants)
 
@@ -711,10 +711,10 @@ def Simulation_Mode():
         result = messagebox.askyesno("Restart", "Do you really want to restart the program?")
         if result:
             applicants = random.randint(95, 145)
-            yellow_card = applicants * 0.34
-            blue_card = applicants * 0.28
-            green_card = applicants * 0.24
-            orange_card = applicants * 0.14
+            yellow_card = int(applicants) * 0.34
+            blue_card = int(applicants) * 0.28
+            green_card = int(applicants) * 0.24
+            orange_card = int(applicants) * 0.14
             today_problem = random.randint(1,100)
 
             sim.destroy()
@@ -1088,7 +1088,7 @@ def ApplicantResult():
     NonPro_Label.config(text=f"Non-Pro License Applicants: {int(blue_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     RenewLicense_Label.config(text=f"Renew License Applicants: {int(green_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
     Miscellaneous_Label.config(text=f"Miscellaneous Applicants: {int(orange_card)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
-    total_applicants_label.config(text=f"Total Applicants: {applicants}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
+    total_applicants_label.config(text=f"Total Applicants: {int(yellow_card) + int(blue_card) + int(green_card) + int(orange_card)}", font=("Montserrat", 15, "italic"),bg='white', fg='#440d31')
 
     try:
         AddedStationLabel.config(text=f"Added Station: {int(PACD_entry.get()) + int(Portal_entry.get()) + int(Cashier_entry.get()) + int(Computer_entry.get()) + int(Biometric_entry.get())}" \
