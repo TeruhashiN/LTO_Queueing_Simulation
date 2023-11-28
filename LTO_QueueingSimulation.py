@@ -16,10 +16,10 @@ Biometric_history_results = []
 
 
 
-#Music Play
-mixer.init()
-mixer.music.load('MusicBackground/music_background.mp3')
-mixer.music.play()
+# #Music Play
+# mixer.init()
+# mixer.music.load('MusicBackground/music_background.mp3')
+# mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -644,8 +644,16 @@ def Simulation_Mode():
             PACD_entry.delete(0, 'end')
             PACD_entry.config(fg="Black")
 
+
     def PACD_entry_focus_out(event):
-        if PACD_entry.get() == "":
+        pacd_input = PACD_entry.get()
+        if pacd_input == "":
+            PACD_entry.insert(0, "Enter number")
+            PACD_entry.config(fg="gray")
+
+        elif not pacd_input.isdigit():
+            messagebox.showinfo("Input Error", "Please input a number for PACD")
+            PACD_entry.delete(0, 'end')
             PACD_entry.insert(0, "Enter number")
             PACD_entry.config(fg="gray")
 
@@ -655,8 +663,14 @@ def Simulation_Mode():
             Portal_entry.config(fg="Black")
 
     def Portal_entry_focus_out(event):
-        if Portal_entry.get() == "":
+        Portal_input = Portal_entry.get()
+        if Portal_input == "":
             Portal_entry.insert(0, "Enter number")
+            Portal_entry.config(fg="gray")
+        elif not Portal_input.isdigit():
+            messagebox.showinfo("Input Error", "Please input a number for Portal")
+            Portal_entry.delete(0, 'end')
+            Portal_entry.insert(0, 'Enter number')
             Portal_entry.config(fg="gray")
 
     def Cashier_entry_focus_in(event):
@@ -665,8 +679,15 @@ def Simulation_Mode():
             Cashier_entry.config(fg="Black")
 
     def Cashier_entry_focus_out(event):
-        if Cashier_entry.get() == "":
+        Cashier_input = Cashier_entry.get()
+        if Cashier_input == "":
             Cashier_entry.insert(0, "Enter number")
+            Cashier_entry.config(fg="gray")
+
+        elif not Cashier_input.isdigit():
+            messagebox.showinfo("Input Error", "Please input a number for Cashier")
+            Cashier_entry.delete(0, 'end')
+            Cashier_entry.insert(0, 'Enter number')
             Cashier_entry.config(fg="gray")
 
     def Computer_entry_focus_in(event):
@@ -675,9 +696,17 @@ def Simulation_Mode():
             Computer_entry.config(fg="Black")
 
     def Computer_entry_focus_out(event):
-        if Computer_entry.get() == "":
+        Computer_input = Computer_entry.get()
+        if Computer_input == "":
             Computer_entry.insert(0, "Enter number")
             Computer_entry.config(fg="gray")
+
+        elif not Computer_input.isdigit():
+            messagebox.showinfo("Input Error", "Please input a number for Computer")
+            Computer_entry.delete(0, 'end')
+            Computer_entry.insert(0, 'Enter number')
+            Computer_entry.config(fg="gray")
+
 
     def Biometric_entry_focus_in(event):
         if Biometric_entry.get() == "Enter number":
@@ -685,8 +714,15 @@ def Simulation_Mode():
             Biometric_entry.config(fg="Black")
 
     def Biometric_entry_focus_out(event):
-        if Biometric_entry.get() == "":
+        Biometric_input = Biometric_entry.get()
+        if Biometric_input == "":
             Biometric_entry.insert(0, "Enter number")
+            Biometric_entry.config(fg="gray")
+
+        elif not Biometric_input.isdigit():
+            messagebox.showinfo("Input Error", "Please input a number for Biometric")
+            Biometric_entry.delete(0, 'end')
+            Biometric_entry.insert(0, 'Enter number')
             Biometric_entry.config(fg="gray")
 
     def show_info():
@@ -724,6 +760,11 @@ def Simulation_Mode():
 
             # Right now, the only problem is that I can't reset the History
 
+    def PACD_entry_focuss_out(event):
+        pacd_input = PACD_entry.get()
+        if not pacd_input.isdigit():
+            messagebox.showinfo("Input Error", "Please input a number for PACD")
+            PACD_entry.delete(0, 'end')  # Clear the content if it's not a digit
 
     def on_exit_click():
         sim.destroy()
@@ -785,6 +826,7 @@ def Simulation_Mode():
     PACD_entry.insert(0, 'Enter number')
     PACD_entry.bind("<FocusIn>", PACD_entry_focus_in)
     PACD_entry.bind("<FocusOut>", PACD_entry_focus_out)
+
 
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     # Portal Station
@@ -1174,7 +1216,7 @@ def showHistory():
     scrollbar.config(command=listbox.yview)
 
 
-MAINGUIMODE()
-# Simulation_Mode()
+# MAINGUIMODE()
+Simulation_Mode()
 
 
