@@ -952,6 +952,14 @@ def Simulation_Mode():
     simulate_exam = Label(sec_frame, text="", bg="#ffffff")
     simulate_exam.place(x=480, y=16)
 
+    # Load the transparent image
+    walking_image = Image.open("Walking/0000.png")
+    walking_ppl = ImageTk.PhotoImage(walking_image)
+
+    # Create a Label widget to display the transparent image
+    walking_simulate = Label(sec_frame, image=walking_ppl, bg='white')  # Set the background color to white
+    walking_simulate.place(x=1, y=433)
+
 
 
 
