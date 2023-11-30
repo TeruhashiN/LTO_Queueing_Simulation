@@ -572,7 +572,7 @@ def MAINGUIMODE():
     button = Button(panel, image=photo, command=guide_butt)
     button.place(relx=0.52, rely=0.54, anchor="center")
 
-    alphatest = Label(panel, text="Keima Test 1.7",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.10",font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1250,y=710)
 
     # Bind the window closing event to the on_closing function
@@ -608,7 +608,7 @@ def InstructionMode():
 
 
 def Simulation_Mode():
-    global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry, Simulation_Button, img
+    global PACD_entry, Portal_entry, Cashier_entry, Computer_entry, Biometric_entry, Simulation_Button, img, simulate_pacd, simulate_cashier, simulate_biometric, simulate_exam, simulate_portal
     def simulateButtonEnter(event):
         Simulation_Button.configure(bg="#35aefa")  # Change the background color when the mouse enters
 
@@ -760,11 +760,12 @@ def Simulation_Mode():
 
             # Right now, the only problem is that I can't reset the History
 
-    def PACD_entry_focuss_out(event):
-        pacd_input = PACD_entry.get()
-        if not pacd_input.isdigit():
-            messagebox.showinfo("Input Error", "Please input a number for PACD")
-            PACD_entry.delete(0, 'end')  # Clear the content if it's not a digit
+    def configresult():
+        simulate_pacd.config(text=f"+ {int(PACD_entry.get())}", font=("Montserrat", 13, "italic"))
+        simulate_cashier.config(text=f"+ {int(Cashier_entry.get())}", font=("Montserrat", 13, "italic"))
+        simulate_biometric.config(text=f"+ {int(Biometric_entry.get())}", font=("Montserrat", 13, "italic"))
+        simulate_portal.config(text=f"+ {int(Portal_entry.get())}", font=("Montserrat", 13, "italic"))
+        simulate_exam.config(text=f"+ {int(Computer_entry.get())}", font=("Montserrat", 13, "italic"))
 
     def on_exit_click():
         sim.destroy()
@@ -784,7 +785,7 @@ def Simulation_Mode():
     panel = Label(sim, image=img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
-    alphatest = Label(panel, text="Keima Test 1.7", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
+    alphatest = Label(panel, text="Keima Test 1.10", font=("Montserrat", 12, "italic"), bg='white', fg="#440d31")
     alphatest.place(x=1215, y=710)
 
     # font
@@ -897,7 +898,7 @@ def Simulation_Mode():
     Biometric_entry.bind("<FocusOut>", Biometric_entry_focus_out)
 
     Simulation_Button = Button(first_frame, text="SIMULATE", fg="#000000", font=mont_bold, width=10, height=2, bd=5,
-    command=lambda: (showResults(), PlacePACD(), PlacePortal(), PlaceCashier(), PlaceComputer(), PlaceBiometric()))
+    command=lambda: (showResults(), PlacePACD(), PlacePortal(), PlaceCashier(), PlaceComputer(), PlaceBiometric(), configresult()))
 
     Simulation_Button.bind("<Enter>", simulateButtonEnter)
     Simulation_Button.bind("<Leave>", simulateButtonLeave)
@@ -917,7 +918,7 @@ def Simulation_Mode():
     sec_frame = LabelFrame(sim)
     sec_frame.place(x=480, y=30, width=sec_frameWidth, height=sec_frameHeight)
 
-    animation_img = ImageTk.PhotoImage(Image.open("LTO Image/LTOBACK.png"))  # LTO Background
+    animation_img = ImageTk.PhotoImage(Image.open("LTO Image/LTO_simulation_bg.png"))  # LTO Background
     panel = Label(sec_frame, image=animation_img)
     panel.pack(side="bottom", fill="both", expand="yes")
 
@@ -934,6 +935,26 @@ def Simulation_Mode():
     HistoryButton.bind("<Enter>", historyEnter)
     HistoryButton.bind("<Leave>", historyLeave)
     HistoryButton.place(x=12,y=100)
+
+    # Gonna make label for each station
+    simulate_pacd = Label(sec_frame, text="", bg="#ffffff")
+    simulate_pacd.place(x=300, y=425)
+
+    simulate_cashier = Label(sec_frame, text="", bg="#ffffff")
+    simulate_cashier.place(x=800, y=300)
+
+    simulate_biometric = Label(sec_frame, text="", bg="#ffffff")
+    simulate_biometric.place(x=800, y=100)
+
+    simulate_portal = Label(sec_frame, text="", bg="#ffffff")
+    simulate_portal.place(x=800, y=500)
+
+    simulate_exam = Label(sec_frame, text="", bg="#ffffff")
+    simulate_exam.place(x=480, y=16)
+
+
+
+
 
     # Register the on_exit_click function to handle window closing
     sim.protocol("WM_DELETE_WINDOW", on_exit_click)
@@ -1033,7 +1054,8 @@ def simulation_result():
 
 def ApplicantResult():
     # This upper one is for the total working hour time
-    global overall_hours, overall_minutes, total_minutes_result, combined_hours, total_minutes_equivalent
+    global overall_hours, overall_minutes, total_minutes_result, combined_hours, total_minutes_equivalent,\
+        simulate_pacd, simulate_cashier, simulate_biometric, simulate_exam, simulate_portal
 
     overall_hours = PACD_hours + Portal_hours + Cashier_hours + Exam_hours + Biometric_hours  # Combination of all Hours Total
     overall_minutes = (PACD_minutes + Portal_minutes + Cashier_minutes + Exam_minutes + Biometric_minutes)  # combination of all Minutes total
@@ -1146,6 +1168,8 @@ def ApplicantResult():
     avgMisc_label.config(text=f"Miscellaneous: {misc_avg_result}",  font=("Montserrat", 10, "bold"), bg='white', fg="#440d31")
 
     FailedExaminees_Label.config(text=f"Failed Examiners: {int(failedExaminers)}", font=("Montserrat", 15, "italic"), bg='white',fg='#440d31')
+
+
 
 
     if today_problem == 3:
