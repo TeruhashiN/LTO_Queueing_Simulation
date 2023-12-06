@@ -16,10 +16,10 @@ Biometric_history_results = []
 
 
 
-# #Music Play
-# mixer.init()
-# mixer.music.load('MusicBackground/music_background.mp3')
-# mixer.music.play()
+#Music Play
+mixer.init()
+mixer.music.load('MusicBackground/music_background.mp3')
+mixer.music.play()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1248,7 +1248,7 @@ def showHistory():
     scrollbar.config(command=listbox.yview)
 
 
-# MAINGUIMODE()
-Simulation_Mode()
+MAINGUIMODE()
+# Simulation_Mode()
 
 
